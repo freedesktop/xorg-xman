@@ -384,4 +384,4 @@ See \fIX(__miscmansuffix__)\fP for a full statement of rights and permissions.
 .SH AUTHORS
 Chris Peterson, MIT X Consortium from the V10 version written by Barry
 Shein formerly of Boston University.
-Bug fixes and Linux support by Carlos A M dos Santos, The XFree86 Project.
+Bug fixes and Linux support by Carlos A M dos Santos, for The XFree86 Project.
