@@ -1,4 +1,5 @@
 /* $XConsortium: man.h,v 1.31 94/12/16 21:36:53 gildea Exp $ */
+/* $XdotOrg: $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -28,7 +29,7 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86: xc/programs/xman/man.h,v 1.3 2000/03/03 23:16:27 dawes Exp $ */
+/* $XFree86: xc/programs/xman/man.h,v 1.4 2001/07/25 15:05:27 dawes Exp $ */
 
 
 /* X toolkit header files */
@@ -146,11 +147,12 @@ typedef struct _ManpageGlobals{
 				   page from. */
   Boolean compress;		/* Compress file on save? */
   Boolean gzip;			/* Gzip file on save? */
+  Boolean deletetempfile;	/* Need to delete tempfile when done? */
   char ** section_name;		/* The name of each of the sections */
 
   ManPageWidgets manpagewidgets; /* The manpage widgets. */
 
-  /* Things to remember when cleaning up whne killing manpage. */
+  /* Things to remember when cleaning up when killing manpage. */
 
   Widget This_Manpage;		/* a pointer to the root of
 				   this manpage. */
@@ -163,7 +165,7 @@ typedef struct _ManpageGlobals{
 typedef struct _Xman_Resources {
   XmanFonts fonts;		/* The fonts used for the man pages. */
   XmanCursors cursors;		/* The cursors for xman. */
-  Boolean show_help_syntax;	/* True of syntax message should be dumped to
+  Boolean show_help_syntax;	/* True if syntax message should be dumped to
 				   stdout. */
   Boolean both_shown_initial;	/* The initial state of the manual pages
 				   show two screens or only one. */
