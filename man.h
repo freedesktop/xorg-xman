@@ -1,5 +1,5 @@
 /* $XConsortium: man.h,v 1.31 94/12/16 21:36:53 gildea Exp $ */
-/* $XdotOrg: xc/programs/xman/man.h,v 1.4 2004/06/08 02:44:35 gisburn Exp $ */
+/* $XdotOrg: xc/programs/xman/man.h,v 1.5 2004/07/01 13:54:46 alanh Exp $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -78,7 +78,11 @@ from the X Consortium.
 
 #define Error(x) { printf x ; exit(EXIT_FAILURE); }
 #define Assertion(expr, msg) { if (!(expr)) { Error msg } }
-#define Log(x)   { if (True) printf x; }
+#ifdef DEBUG
+#  define Log(x)   { if(True)  printf x; }
+#else
+#  define Log(x)   { if(False) printf x; }
+#endif /* DEBUG */
 
 /* 
  * Assigning values here allows the user of Bitwise Or.
