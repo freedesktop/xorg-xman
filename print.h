@@ -40,6 +40,7 @@ void DoPrintManpage(const char *programname,
                     FILE *manpage,
                     Widget toplevel, 
                     Display *pdpy, XPContext pcontext,
+                    XpuColorspaceRec *colorspace,
                     XtCallbackProc printDisplayDestroyCallback,
                     const char *jobTitle,
                     const char *toFile);
