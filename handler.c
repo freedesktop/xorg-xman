@@ -28,7 +28,7 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86: xc/programs/xman/handler.c,v 1.8 2004/03/12 02:17:55 dickey Exp $ */
+/* $XFree86: xc/programs/xman/handler.c,v 1.6 2003/01/19 04:44:45 paulo Exp $ */
 
 /*
  * xman - X window system manual page display program.
@@ -46,8 +46,8 @@ static void ToggleBothShownState(ManpageGlobals * man_globals);
 
 /*	Function Name: OptionCallback
  *	Description: This is the callback function for the callback menu.
- *	Arguments: w - the widget we are calling back from.
- *                 globals_pointer - a pointer to the pseudo globals structure
+ *	Arguments: w - the widget we are calling back from. 
+ *                 globals_pointer - a pointer to the psuedo globals structure
  *                                  for this manpage.
  *                 junk - (call data) not used.
  *	Returns: none.
@@ -112,7 +112,7 @@ ToggleBothShownState(ManpageGlobals * man_globals)
   else {
     Widget manpage = man_globals->manpagewidgets.manpage;
     Widget dir = man_globals->manpagewidgets.directory;
-
+    
     label_str = SHOW_ONE;
 
     XtSetArg(arglist[0], XtNpreferredPaneSize, resources.directory_height);
@@ -125,15 +125,16 @@ ToggleBothShownState(ManpageGlobals * man_globals)
     XtManageChild(manpage);
   }
   man_globals->both_shown = !man_globals->both_shown;
-
+  
   if (man_globals->dir_shown)
-    ShowDirTitle(man_globals,man_globals->current_directory);
+    ChangeLabel(man_globals->label,
+		man_globals->section_name[man_globals->current_directory]);
   else
-    ShowManTitle(man_globals);
-
+    ChangeLabel(man_globals->label, man_globals->manpage_title);
+  
   XtSetArg(arglist[0], XtNlabel, label_str);
   XtSetValues(man_globals->both_screens_entry, arglist, ONE);
-
+  
   /* if both are shown there is no need to switch between the two. */
 
   XtSetArg(arglist[0], XtNsensitive, !man_globals->both_shown);
@@ -148,7 +149,7 @@ ToggleBothShownState(ManpageGlobals * man_globals)
  *	Returns: none
  */
 
-/* How far off the top of the widget to have the initial cursor position. */
+/* How far off the top of the widget to have the initial cursor postion. */
 
 #define OFF_OF_TOP 25
 
@@ -169,7 +170,7 @@ Popup(Widget w, XtGrabKind grab_kind)
 
 /*	Function Name: PutUpManpage
  *	Description: Puts the manpage on the display.
- *	Arguments: man_globals - a pointer to the pseudo globals structure
+ *	Arguments: man_globals - a pointer to the psuedo globals structure
  *                                  for this manpage.
  *                 file - the file to display.
  *	Returns: none.
@@ -180,7 +181,7 @@ PutUpManpage(ManpageGlobals * man_globals, FILE * file)
 {
   String params = "ManualPage";
   Cardinal num_params = 1;
-
+  
   if (file == NULL)
     return;
 
@@ -197,8 +198,8 @@ PutUpManpage(ManpageGlobals * man_globals, FILE * file)
 
 /*	Function Name: DirectoryHandler
  *	Description: This is the callback function for the directory listings.
- *	Arguments: w - the widget we are calling back from.
- *                 global_pointer - the pointer to the pseudo global structure
+ *	Arguments: w - the widget we are calling back from. 
+ *                 global_pointer - the pointer to the psuedo global structure
  *                                  associated with this manpage.
  *                 ret_val - return value from the list widget.
  *	Returns: none.
@@ -219,8 +220,8 @@ DirectoryHandler(Widget w, XtPointer global_pointer, XtPointer ret_val)
 
 /*	Function Name: DirPopupCallback
  *	Description: This is the callback function for the callback menu.
- *	Arguments: w - the widget we are calling back from.
- *                 pointer - a pointer to the pseudo globals structure
+ *	Arguments: w - the widget we are calling back from. 
+ *                 pointer - a pointer to the psuedo globals structure
  *                                  for this manpage.
  *                 junk - (call data) not used.
  *	Returns: none.
@@ -230,7 +231,7 @@ DirectoryHandler(Widget w, XtPointer global_pointer, XtPointer ret_val)
 void
 DirPopupCallback(Widget w, XtPointer pointer, XtPointer junk)
 {
-  ManpageGlobals * man_globals;
+  ManpageGlobals * man_globals; 
   MenuStruct * menu_struct;
   Widget parent;
   int number;
@@ -243,7 +244,7 @@ DirPopupCallback(Widget w, XtPointer pointer, XtPointer junk)
   current_box = man_globals->current_directory;
 
   /* We have used this guy, pop down the menu. */
-
+  
   if (number != current_box) {
     /* This is the only one that we know has a parent. */
     parent = XtParent(man_globals->manpagewidgets.box[INITIAL_DIR]);
@@ -254,7 +255,7 @@ DirPopupCallback(Widget w, XtPointer pointer, XtPointer junk)
     XtManageChild(man_globals->manpagewidgets.box[number]);
 
     XawListUnhighlight(man_globals->manpagewidgets.box[current_box]);
-    ShowDirTitle(man_globals, number);
+    ChangeLabel(man_globals->label, man_globals->section_name[number]);
     man_globals->current_directory = number;
   }
 
@@ -264,7 +265,7 @@ DirPopupCallback(Widget w, XtPointer pointer, XtPointer junk)
     XtManageChild(man_globals->manpagewidgets.directory);
   }
 }
-
+    
 /************************************************************
  *
  * Action Routines.
@@ -275,7 +276,7 @@ DirPopupCallback(Widget w, XtPointer pointer, XtPointer junk)
  *	Description: This is the action routine may save the manpage.
  *      Arguments: w - any widget in the widget tree.
  *                 event - NOT USED.
- *                 params, num_params - the parameters passed to the action
+ *                 params, num_params - the parameters paseed to the action
  *                                      routine, can be either Manpage or
  *                                      Directory.
  *      Returns: none.
@@ -289,7 +290,7 @@ SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_para
   char cmdbuf[BUFSIZ], error_buf[BUFSIZ];
 
   if (*num_params != 1) {
-    XtAppWarning(XtWidgetToApplicationContext(w),
+    XtAppWarning(XtWidgetToApplicationContext(w), 
        "Xman - SaveFormattedPage: This action routine requires one argument.");
     return;
   }
@@ -310,7 +311,7 @@ SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_para
     if (!man_globals->compress)
 #endif
 
-      sprintf(cmdbuf, "%s %s %s", COPY, man_globals->tempfile,
+      sprintf(cmdbuf, "%s %s %s", COPY, man_globals->tempfile, 
 	      man_globals->save_file);
 
 #ifndef NO_COMPRESS
@@ -319,7 +320,7 @@ SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_para
 	sprintf(cmdbuf, "%s < %s > %s", GZIP_COMPRESS, man_globals->tempfile,
 		man_globals->save_file);
       else
-	sprintf(cmdbuf, "%s < %s > %s", COMPRESS, man_globals->tempfile,
+	sprintf(cmdbuf, "%s < %s > %s", COMPRESS, man_globals->tempfile, 
 		man_globals->save_file);
 #endif
 
@@ -346,10 +347,10 @@ SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_para
     PopupWarning(man_globals, error_buf);
     return;
   }
-
+    
 /*
  * We do not need the filename anymore, and have the fd open.
- * We will unlink it.
+ * We will unlink it.     
  */
 
   unlink(man_globals->tempfile);
@@ -361,7 +362,7 @@ SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_para
  *                   or directory.
  *      Arguments: w - any widget in the widget tree.
  *                 event - NOT USED.
- *                 params, num_params - the parameters passed to the action
+ *                 params, num_params - the parameters paseed to the action
  *                                      routine, can be either Manpage or
  *                                      Directory.
  *      Returns: none.
@@ -377,7 +378,7 @@ GotoPage(Widget w, XEvent * event, String * params, Cardinal * num_params)
   Boolean sensitive;
 
   if (*num_params != 1) {
-    XtAppWarning(XtWidgetToApplicationContext(w),
+    XtAppWarning(XtWidgetToApplicationContext(w), 
 		"Xman - GotoPage: This action routine requires one argument.");
     return;
   }
@@ -385,7 +386,8 @@ GotoPage(Widget w, XEvent * event, String * params, Cardinal * num_params)
   man_globals = GetGlobals(w);
 
   if (man_globals->both_shown) {
-    ShowDirTitle(man_globals, man_globals->current_directory);
+    ChangeLabel(man_globals->label, 
+		man_globals->section_name[man_globals->current_directory]);
     return;
   }
 
@@ -395,7 +397,7 @@ GotoPage(Widget w, XEvent * event, String * params, Cardinal * num_params)
     XtSetArg(arglist[0], XtNsensitive, &sensitive);
     XtGetValues(man_globals->manpage_entry, arglist, ONE);
     if (sensitive) {
-      ShowManTitle(man_globals);
+      ChangeLabel(man_globals->label,man_globals->manpage_title);
       XtUnmanageChild(man_globals->manpagewidgets.directory);
       XtManageChild(man_globals->manpagewidgets.manpage);
       man_globals->dir_shown = FALSE;
@@ -403,25 +405,10 @@ GotoPage(Widget w, XEvent * event, String * params, Cardinal * num_params)
     break;
   case 'D':
   case 'd':
-    ShowDirTitle(man_globals, man_globals->current_directory);
+    ChangeLabel(man_globals->label,
+		man_globals->section_name[man_globals->current_directory]);
     XtUnmanageChild(man_globals->manpagewidgets.manpage);
-
-    /*
-     * GoPage(Directory) when the directory is already shown causes the layout
-     * to be toggled (i.e., whether the names are shown left-to-right or
-     * top-to-bottom).
-     */
-    if (man_globals->dir_shown) {
-      Boolean toggle;
-      Widget dir = man_globals->manpagewidgets.box[man_globals->current_directory];
-      XtSetArg(arglist[0], XtNverticalList, &toggle);
-      XtGetValues(dir, arglist, 1);
-      toggle = !toggle;
-      XtSetArg(arglist[0], XtNverticalList, toggle);
-      XtSetValues(dir, arglist, 1);
-    }
-
-    XtManageChild(man_globals->manpagewidgets.directory);
+    XtManageChild(man_globals->manpagewidgets.directory);  
     man_globals->dir_shown = TRUE;
     break;
   default:
@@ -441,7 +428,7 @@ GotoPage(Widget w, XEvent * event, String * params, Cardinal * num_params)
  */
 
 /*ARGSUSED*/
-void
+void 
 Quit(Widget w, XEvent * event, String * params, Cardinal * num_params)
 {
   XCloseDisplay(XtDisplay(w));
@@ -457,7 +444,7 @@ Quit(Widget w, XEvent * event, String * params, Cardinal * num_params)
  */
 
 /*ARGSUSED*/
-void
+void 
 PopupHelp(Widget w, XEvent * event, String * params, Cardinal * num_params)
 {
   if (MakeHelpWidget())
@@ -473,7 +460,7 @@ PopupHelp(Widget w, XEvent * event, String * params, Cardinal * num_params)
  */
 
 /*ARGSUSED*/
-void
+void 
 PopupSearch(Widget w, XEvent * event, String * params, Cardinal * num_params)
 {
   ManpageGlobals * man_globals = GetGlobals(w);
@@ -496,7 +483,7 @@ PopupSearch(Widget w, XEvent * event, String * params, Cardinal * num_params)
  */
 
 /*ARGSUSED*/
-void
+void 
 CreateNewManpage(Widget w, XEvent * event, String * params, Cardinal * num_params)
 {
   (void) CreateManpage(NULL);
@@ -512,11 +499,11 @@ CreateNewManpage(Widget w, XEvent * event, String * params, Cardinal * num_param
  */
 
 /*ARGSUSED*/
-void
+void 
 RemoveThisManpage(Widget w, XEvent * event, String * params, Cardinal * num_params)
 {
   ManpageGlobals * man_globals = GetGlobals(w);
-
+  
   if (man_globals->This_Manpage != help_widget) {
     RemoveGlobals(man_globals->This_Manpage);
     XtDestroyWidget(man_globals->This_Manpage);
@@ -526,7 +513,7 @@ RemoveThisManpage(Widget w, XEvent * event, String * params, Cardinal * num_para
     XtFree( (char *) man_globals);
 
     if ( (--man_pages_shown) == 0)
-      Quit(w, NULL, NULL, NULL);
+      Quit(w, NULL, NULL, NULL);  
   }
   else
     XtPopdown(help_widget);
@@ -541,7 +528,7 @@ RemoveThisManpage(Widget w, XEvent * event, String * params, Cardinal * num_para
  */
 
 /*ARGSUSED*/
-void
+void 
 Search(Widget w, XEvent * event, String * params, Cardinal * num_params)
 {
   ManpageGlobals * man_globals = GetGlobals(w);
@@ -550,7 +537,7 @@ Search(Widget w, XEvent * event, String * params, Cardinal * num_params)
   XtPopdown(  XtParent(XtParent(w)) );       /* popdown the search widget */
 
   if ( (*num_params < 1) || (*num_params > 2) ) {
-    XtAppWarning(XtWidgetToApplicationContext(w),
+    XtAppWarning(XtWidgetToApplicationContext(w), 
       "Xman - Search: This action routine requires one or two arguments.");
     return;
   }
@@ -569,33 +556,33 @@ Search(Widget w, XEvent * event, String * params, Cardinal * num_params)
     file = NULL;
     break;
   default:
-    XtAppWarning(XtWidgetToApplicationContext(w),
+    XtAppWarning(XtWidgetToApplicationContext(w), 
 		 "Xman - Search: First parameter unknown.");
     file = NULL;
     break;
   }
 
-  if ( *num_params == 2 )
+  if ( *num_params == 2 ) 
     switch (params[1][0]) {
     case 'O':
     case 'o':
       if (file != NULL) {
-	Widget w2;
+	Widget w;
 	char * label;
 
-	w2 = CreateManpage(file);
+	w = CreateManpage(file);
 	man_pages_shown++;
 
 	/* Put title into new manual page. */
 
 	label = man_globals->manpage_title;
-	man_globals = GetGlobals(w2);
+	man_globals = GetGlobals(w);
 	strcpy(man_globals->manpage_title, label);
-	ShowManTitle(man_globals);
+	ChangeLabel(man_globals->label, label);
       }
       break;
     default:
-      XtAppWarning(XtWidgetToApplicationContext(w),
+      XtAppWarning(XtWidgetToApplicationContext(w), 
 		   "Xman - Search: Second parameter unknown.");
       break;
     }
@@ -615,26 +602,9 @@ Search(Widget w, XEvent * event, String * params, Cardinal * num_params)
  */
 
 /*ARGSUSED*/
-void
+void 
 ShowVersion(Widget w, XEvent * event, String * params, Cardinal * num_params)
 {
   ManpageGlobals * man_globals = GetGlobals(w);
   ChangeLabel(man_globals->label, XMAN_VERSION);
-}
-
-void
-ShowManTitle(ManpageGlobals *man_globals)
-{
-  ChangeLabel(man_globals->label,
-	      man_globals->manpage_show_file
-	      ? man_globals->manpage_file
-	      : man_globals->manpage_title);
-  man_globals->manpage_show_file = !man_globals->manpage_show_file;
-}
-
-void
-ShowDirTitle(ManpageGlobals *man_globals, int number)
-{
-  ChangeLabel(man_globals->label, man_globals->section_name[number]);
-  man_globals->manpage_show_file = FALSE;
 }

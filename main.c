@@ -28,7 +28,7 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86: xc/programs/xman/main.c,v 1.5 2004/03/12 02:17:55 dickey Exp $ */
+/* $XFree86: xc/programs/xman/main.c,v 1.3 2000/03/03 23:16:27 dawes Exp $ */
 
 /*
  * xman - X window system manual page display program.
@@ -37,7 +37,6 @@ from the X Consortium.
  */
 
 #include "globals.h"
-#include "vendor.h"
 #ifndef ZERO
 #include <X11/Xaw/Cardinals.h>
 #endif /* ZERO */
@@ -57,8 +56,8 @@ static XtResource my_resources[] = {
   {"bothShown", XtCBoolean, XtRBoolean, sizeof(Boolean),
      Offset(both_shown_initial), XtRString, "False"},
   {"directoryHeight", "DirectoryHeight", XtRInt, sizeof(int),
-     Offset(directory_height), XtRString, "150"},
-  {"topCursor", XtCCursor, XtRCursor, sizeof(Cursor),
+     Offset(directory_height), XtRString, "150"},  
+  {"topCursor", XtCCursor, XtRCursor, sizeof(Cursor), 
      Offset(cursors.top), XtRString, XMAN_CURSOR},
   {"helpCursor", XtCCursor, XtRCursor, sizeof(Cursor),
      Offset(cursors.help), XtRString, HELP_CURSOR},
@@ -78,8 +77,6 @@ static XtResource my_resources[] = {
      Offset(top_box_active), XtRString, "True"},
   {"clearSearchString", "ClearSearchString", XtRBoolean, sizeof(Boolean),
      Offset(clear_search_string), XtRImmediate, (caddr_t) TRUE},
-  {"formatCommand", XtCString, XtRString, sizeof(char *),
-     Offset(format_cmd), XtRString, FORMAT},
   {"title", XtCString, XtRString, sizeof(char *),
      Offset(title), XtRString, "xman"},
   {"iconic", XtCBoolean, XtRBoolean, sizeof(Boolean),
@@ -115,7 +112,7 @@ static XrmOptionDescRec xman_options[] = {
 {"-notopbox", "topBox",                  XrmoptionNoArg,  (caddr_t) "False"},
 {"-helpfile", "helpFile",                XrmoptionSepArg, (caddr_t) NULL},
 {"-bothshown","bothShown",               XrmoptionNoArg,  (caddr_t) "True"},
-{"-title",    "title",                   XrmoptionSepArg, (caddr_t) "xman"},
+{"-title",    "title",                   XrmoptionSepArg, (caddr_t) "xman"}, 
 {"-iconic",   "iconic",                  XrmoptionNoArg,  (caddr_t) "True"},
 };
 
@@ -150,7 +147,7 @@ int main(int argc, char ** argv)
   XtAppContext app_con;
 
   saved_argc = argc;
-  saved_argv = (char **)XtMalloc((unsigned)argc * sizeof(char *));
+  saved_argv = (char **)XtMalloc(argc * sizeof(char *));
   bcopy(argv, saved_argv, argc * sizeof(char *));
 
   XtSetLanguageProc(NULL, (XtLanguageProc) NULL, NULL);
@@ -165,7 +162,7 @@ int main(int argc, char ** argv)
 
   AdjustDefResources();
 
-  XtGetApplicationResources( initial_widget, (caddr_t) &resources,
+  XtGetApplicationResources( initial_widget, (caddr_t) &resources, 
 			    my_resources, XtNumber(my_resources),
 			    NULL, (Cardinal) 0);
 
@@ -192,7 +189,7 @@ int main(int argc, char ** argv)
  */
 
   default_width = DEFAULT_WIDTH;
-  default_height=DisplayHeight(XtDisplay(initial_widget),
+  default_height=DisplayHeight(XtDisplay(initial_widget), 
 			       DefaultScreen(XtDisplay(initial_widget)));
   default_height *= 3;
   default_height /= 4;
@@ -200,8 +197,8 @@ int main(int argc, char ** argv)
   if ( (sections = Man()) == 0 )
     PrintError("There are no manual sections to display, check your MANPATH.");
 
-  if (resources.top_box_active)
-    MakeTopBox();
+  if (resources.top_box_active) 
+    MakeTopBox();	
   else
     (void) CreateManpage(NULL);
 
@@ -214,7 +211,7 @@ int main(int argc, char ** argv)
  * no top box is present.
  */
 
-  man_pages_shown = 1;
+  man_pages_shown = 1;		
 
   XtAppMainLoop(app_con);
 
@@ -227,7 +224,7 @@ int main(int argc, char ** argv)
  *	Returns: none.
  */
 
-static void
+static void 
 ArgError(int argc, char ** argv)
 {
   int i;
@@ -256,12 +253,12 @@ ArgError(int argc, char ** argv)
   "-xrm <resource>",         "Specifies a resource on the command line.",
   NULL, NULL,
   };
-
+  
   syntax = syntax_def;
 
-  for (i = 1; i < argc ; i++)
+  for (i = 1; i < argc ; i++) 
     (void) printf("This argument is unknown to Xman: %s\n", argv[i]);
-
+  
   (void) printf("\nKnown arguments are:\n");
 
   while ( *syntax != NULL ) {
@@ -281,7 +278,7 @@ static void
 AdjustDefResources(void)
 {
   char        *xwinhome = NULL;
-  Cardinal i;
+  int i;
 
   if (!(xwinhome = getenv("XWINHOME")))
     return;
