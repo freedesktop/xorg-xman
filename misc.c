@@ -153,15 +153,8 @@ OpenFile(ManpageGlobals * man_globals, FILE * file)
 {
   Arg arglist[1];
   Cardinal num_args = 0;
-  
-  if (man_globals->curr_file) {
-#if 0 /* Ownership rules need to be fixed first */
-    fclose(man_globals->curr_file);
-#endif
-  }
-  man_globals->curr_file = file;
 
-  XtSetArg(arglist[num_args], XtNfile, man_globals->curr_file); num_args++;
+  XtSetArg(arglist[num_args], XtNfile, file); num_args++;
   XtSetValues(man_globals->manpagewidgets.manpage, arglist, num_args);
 }
 

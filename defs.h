@@ -67,7 +67,7 @@ from the X Consortium.
 
 /* Names of the menu buttons */
 
-#define NUM_OPTIONS 10		/* Number of menu options. */
+#define NUM_OPTIONS 9		/* Number of menu options. */
 
 #define DIRECTORY      "displayDirectory"
 #define MANPAGE        "displayManualPage"
@@ -76,7 +76,6 @@ from the X Consortium.
 #define BOTH_SCREENS   "showBothScreens"
 #define REMOVE_MANPAGE "removeThisManpage"
 #define OPEN_MANPAGE   "openNewManpage"
-#define PRINT_MANPAGE  "printManualPage"
 #define SHOW_VERSION   "showVersion"
 #define QUIT           "quit"
 

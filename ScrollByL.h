@@ -60,12 +60,8 @@ from the X Consortium.
 #define XtNmanualFontBold   "manualFontBold"
 #define XtNmanualFontItalic "manualFontItalic"
 #define XtNmanualFontSymbol "manualFontSymbol"
-#define XtNNumTotalLines    "numTotalLines"
-#define XtNNumVisibleLines  "numVisibleLines"
 
 #define XtCIndent           "Indent"
-#define XtCNumTotalLines    "NumTotalLines"
-#define XtCNumVisibleLines  "NumVisibleLines"
 
 /* Class record constants */
 

@@ -68,7 +68,6 @@ typedef struct _ScrollByLinePart {
     * normal_font,
     * italic_font,
     * symbol_font;
-  int h_width;			/* Main font width */
   
 /* variables not in resource list. */
 
@@ -81,8 +80,7 @@ typedef struct _ScrollByLinePart {
   GC bold_gc, normal_gc, italic_gc, symbol_gc; /* gc for drawing. */
 
   char ** top_line;		/* The top line of the file. */
-  int lines;		/* Total number of line in the file. */
-  int num_visible_lines;  /* Number of lines visible */
+  int lines;			/* number of line in the file. */
 } ScrollByLinePart;
 
 /****************************************************************
