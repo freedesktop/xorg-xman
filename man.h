@@ -1,5 +1,5 @@
 /* $XConsortium: man.h,v 1.31 94/12/16 21:36:53 gildea Exp $ */
-/* $XdotOrg: $ */
+/* $XdotOrg: xc/programs/xman/man.h,v 1.3 2004/05/22 19:20:06 alanc Exp $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -43,6 +43,7 @@ from the X Consortium.
 /* Std system and C header files */
 
 #include <stdio.h>
+#include <limits.h>
 
 #include <X11/Xfuncs.h>
 #include <X11/Xos.h>
@@ -71,6 +72,13 @@ from the X Consortium.
 
 #include "version.h"
 #include "defs.h"
+
+/* Turn a NULL pointer string into an empty string */
+#define NULLSTR(x) (((x)!=NULL)?(x):(""))
+
+#define Error(x) { printf x ; exit(EXIT_FAILURE); }
+#define Assertion(expr, msg) { if (!(expr)) { Error msg } }
+#define Log(x)   { if (True) printf x; }
 
 /* 
  * Assigning values here allows the user of Bitwise Or.
@@ -137,7 +145,13 @@ typedef struct _ManpageGlobals{
 
   Widget dir_entry, manpage_entry, help_entry,
     search_entry, both_screens_entry, remove_entry, open_entry,
-    version_entry, quit_entry;
+    print_entry, version_entry, quit_entry;
+
+  /* Print objects and data */
+  Widget printdialog_shell;     /* Shell for the print dialog */
+  Widget printdialog;           /* Print dialog */
+
+  /* Misc. */
 
   char manpage_title[80];       /* The label to use for the current manpage. */
 
@@ -157,6 +171,7 @@ typedef struct _ManpageGlobals{
   Widget This_Manpage;		/* a pointer to the root of
 				   this manpage. */
 
+  FILE  *curr_file;             /* Current file shown in manpage widget */
 } ManpageGlobals;
 
 
@@ -221,6 +236,7 @@ void Quit(Widget w, XEvent * event, String * params, Cardinal * num_params);
 void RemoveThisManpage(Widget w, XEvent * event, String * params, Cardinal * num_params);
 void SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_params);
 void Search(Widget w, XEvent * event, String * params, Cardinal * num_params);
+void PrintThisManpage(ManpageGlobals *mg);
 void ShowVersion(Widget w, XEvent * event, String * params, Cardinal * num_params);
 
 /* help.c */

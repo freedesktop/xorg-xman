@@ -121,13 +121,7 @@ MakeTopBox(void)
 				/* add WM_COMMAND property */
   XSetCommand(XtDisplay(top), XtWindow(top), saved_argv, saved_argc);
 
-  man_globals = (ManpageGlobals*) XtMalloc( (Cardinal) sizeof(ManpageGlobals));
-  man_globals->label = NULL;
-  man_globals->search_widget = NULL;
-  man_globals->manpagewidgets.directory = NULL;
-  man_globals->manpagewidgets.manpage = NULL;
-  man_globals->manpagewidgets.box = NULL;
-  man_globals->current_directory = 0;
+  man_globals = (ManpageGlobals*) XtCalloc(ONE, (Cardinal) sizeof(ManpageGlobals));
   MakeSearchWidget(man_globals, top);
   MakeSaveWidgets(man_globals, top);
 
@@ -435,6 +429,7 @@ CreateOptionMenu(ManpageGlobals * man_globals, Widget parent)
     BOTH_SCREENS, 
     REMOVE_MANPAGE,
     OPEN_MANPAGE,
+    PRINT_MANPAGE,
     SHOW_VERSION,
     QUIT
   };
@@ -470,12 +465,16 @@ CreateOptionMenu(ManpageGlobals * man_globals, Widget parent)
 	man_globals->open_entry = entry;
 	break;
     case 7:
-	man_globals->version_entry = entry;
+	man_globals->print_entry = entry;
 	break;
     case 8:
+	man_globals->version_entry = entry;
+	break;
+    case 9:
 	man_globals->quit_entry = entry;
 	break;
     default:
+        Error(("CreateOptionMenu: Unknown id=%d\n", i));
 	break;
     }
   }
