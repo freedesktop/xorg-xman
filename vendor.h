@@ -28,7 +28,7 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86: xc/programs/xman/vendor.h,v 1.13 2003/07/29 21:16:56 dawes Exp $ */
+/* $XFree86: xc/programs/xman/vendor.h,v 1.12 2003/03/26 20:43:59 tsi Exp $ */
 
 /* Vendor-specific definitions */
 
