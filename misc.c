@@ -28,7 +28,7 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86$ */
+/* $XFree86: xc/programs/xman/misc.c,v 1.10 2003/08/02 17:35:48 herrb Exp $ */
 
 /*
  * xman - X window system manual page display program.
