@@ -1,5 +1,5 @@
 /* $XConsortium: vendor.h,v 1.12 94/04/17 20:44:00 rws Exp $ */
-/* $XdotOrg: $ */
+/* $XdotOrg: xc/programs/xman/vendor.h,v 1.3 2004/05/22 19:20:06 alanc Exp $ */
 /*
 
 Copyright (c) 1991  X Consortium
@@ -168,7 +168,7 @@ from the X Consortium.
 # elif defined(BSD) && (BSD >= 199103)
 #  define FORMAT "| eqn | tbl | nroff -man"
 # elif defined(linux)
-#  define FORMAT "| eqn | tbl | GROFF_NO_SGR= groff -Tlatin1 -mandoc"
+#  define FORMAT "| pic | eqn | tbl -Tlatin1 | GROFF_NO_SGR= groff -Tlatin1 -mandoc"
 # else
 #  define FORMAT "| neqn | nroff -man"      /* The format command. */
 # endif
