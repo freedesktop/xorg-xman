@@ -28,7 +28,7 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86: xc/programs/xman/defs.h,v 1.2 2000/03/03 23:16:26 dawes Exp $ */
+/* $XFree86: xc/programs/xman/defs.h,v 1.3 2001/04/19 19:54:51 dawes Exp $ */
 
 /*
  * xman - X window system manual page display program.
