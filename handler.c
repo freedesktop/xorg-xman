@@ -28,7 +28,7 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86: xc/programs/xman/handler.c,v 1.7 2003/04/09 20:31:31 herrb Exp $ */
+/* $XFree86$ */
 
 /*
  * xman - X window system manual page display program.

@@ -28,7 +28,7 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86: xc/programs/xman/buttons.c,v 1.4 2003/01/19 04:44:45 paulo Exp $ */
+/* $XFree86$ */
 
 /*
  * xman - X window system manual page display program.
