@@ -1,5 +1,5 @@
 /* $XConsortium: misc.c,v 1.31 94/12/16 21:36:53 gildea Exp $ */
-/* $XdotOrg: xc/programs/xman/misc.c,v 1.3 2004/05/22 19:20:06 alanc Exp $ */
+/* $XdotOrg: xc/programs/xman/misc.c,v 1.4 2004/06/08 02:44:35 gisburn Exp $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -138,7 +138,7 @@ void
 PrintError(char * string)
 {
   fprintf(stderr,"Xman Error: %s\n",string);
-  exit(1);
+  exit(EXIT_FAILURE);
 }
 
 /*	Function Name: OpenFile
@@ -153,8 +153,15 @@ OpenFile(ManpageGlobals * man_globals, FILE * file)
 {
   Arg arglist[1];
   Cardinal num_args = 0;
+  
+  if (man_globals->curr_file) {
+#if 0 /* Ownership rules need to be fixed first */
+    fclose(man_globals->curr_file);
+#endif
+  }
+  man_globals->curr_file = file;
 
-  XtSetArg(arglist[num_args], XtNfile, file); num_args++;
+  XtSetArg(arglist[num_args], XtNfile, man_globals->curr_file); num_args++;
   XtSetValues(man_globals->manpagewidgets.manpage, arglist, num_args);
 }
 

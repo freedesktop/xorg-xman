@@ -1,5 +1,5 @@
 /* $XConsortium: man.h,v 1.31 94/12/16 21:36:53 gildea Exp $ */
-/* $XdotOrg: xc/programs/xman/man.h,v 1.3 2004/05/22 19:20:06 alanc Exp $ */
+/* $XdotOrg: xc/programs/xman/man.h,v 1.6 2004/07/29 00:40:35 gisburn Exp $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -43,6 +43,7 @@ from the X Consortium.
 /* Std system and C header files */
 
 #include <stdio.h>
+#include <limits.h>
 
 #include <X11/Xfuncs.h>
 #include <X11/Xos.h>
@@ -71,6 +72,17 @@ from the X Consortium.
 
 #include "version.h"
 #include "defs.h"
+
+/* Turn a NULL pointer string into an empty string */
+#define NULLSTR(x) (((x)!=NULL)?(x):(""))
+
+#define Error(x) { printf x ; exit(EXIT_FAILURE); }
+#define Assertion(expr, msg) { if (!(expr)) { Error msg } }
+#ifdef DEBUG
+#  define Log(x)   { if(True)  printf x; }
+#else
+#  define Log(x)   { if(False) printf x; }
+#endif /* DEBUG */
 
 /* 
  * Assigning values here allows the user of Bitwise Or.
@@ -132,12 +144,19 @@ typedef struct _ManpageGlobals{
     help_button,		/* The help button. */
     option_menu,		/* The option menu. */
     text_widget;		/* text widget containing search string. */
-
-  /* Widgets (Objects really) for the command menu entries. */
-
-  Widget dir_entry, manpage_entry, help_entry,
-    search_entry, both_screens_entry, remove_entry, open_entry,
-    version_entry, quit_entry;
+ 
+  /* Widgets (Objects really) for the command menu entries. */ 
+ 
+  Widget dir_entry, manpage_entry, help_entry, 
+    search_entry, both_screens_entry, remove_entry, 
+    open_entry, print_entry, version_entry, quit_entry; 
+ 
+#ifdef INCLUDE_XPRINT_SUPPORT
+  /* Print objects and data */
+  Widget printdialog_shell;     /* Shell for the print dialog */
+  Widget printdialog;           /* Print dialog */
+#endif /*INCLUDE_XPRINT_SUPPORT */
+  /* Misc. */
 
   char manpage_title[80];       /* The label to use for the current manpage. */
 
@@ -157,6 +176,7 @@ typedef struct _ManpageGlobals{
   Widget This_Manpage;		/* a pointer to the root of
 				   this manpage. */
 
+  FILE  *curr_file;             /* Current file shown in manpage widget */
 } ManpageGlobals;
 
 
@@ -221,6 +241,9 @@ void Quit(Widget w, XEvent * event, String * params, Cardinal * num_params);
 void RemoveThisManpage(Widget w, XEvent * event, String * params, Cardinal * num_params);
 void SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_params);
 void Search(Widget w, XEvent * event, String * params, Cardinal * num_params);
+#ifdef INCLUDE_XPRINT_SUPPORT
+void PrintThisManpage(Widget w, XEvent * event, String * params, Cardinal * num_params);
+#endif /* INCLUDE_XPRINT_SUPPORT */
 void ShowVersion(Widget w, XEvent * event, String * params, Cardinal * num_params);
 
 /* help.c */
@@ -233,7 +256,6 @@ Bool ReadManConfig(char manpath[]);
 int Man(void);
 
 /* misc.c */
-FILE * DoSearch(ManpageGlobals * man_globals, int type);
 FILE * FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num);
 ManpageGlobals * GetGlobals(Widget w);
 void AddCursor(Widget w, Cursor cursor);
@@ -248,6 +270,7 @@ void ParseEntry(char *entry, char *path, char *sect, char *page);
 FILE * Format(ManpageGlobals * man_globals, char * entry);
 
 /* search */
+FILE * DoSearch(ManpageGlobals * man_globals, int type);
 void MakeSearchWidget(ManpageGlobals * man_globals, Widget parent);
 
 /* tkfunctions.c */
