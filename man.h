@@ -1,5 +1,5 @@
 /* $XConsortium: man.h,v 1.31 94/12/16 21:36:53 gildea Exp $ */
-/* $XdotOrg: xc/programs/xman/man.h,v 1.3 2004/05/22 19:20:06 alanc Exp $ */
+/* $XdotOrg: xc/programs/xman/man.h,v 1.4 2004/06/08 02:44:35 gisburn Exp $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -249,7 +249,6 @@ Bool ReadManConfig(char manpath[]);
 int Man(void);
 
 /* misc.c */
-FILE * DoSearch(ManpageGlobals * man_globals, int type);
 FILE * FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num);
 ManpageGlobals * GetGlobals(Widget w);
 void AddCursor(Widget w, Cursor cursor);
@@ -264,6 +263,7 @@ void ParseEntry(char *entry, char *path, char *sect, char *page);
 FILE * Format(ManpageGlobals * man_globals, char * entry);
 
 /* search */
+FILE * DoSearch(ManpageGlobals * man_globals, int type);
 void MakeSearchWidget(ManpageGlobals * man_globals, Widget parent);
 
 /* tkfunctions.c */
