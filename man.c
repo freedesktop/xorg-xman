@@ -437,7 +437,7 @@ ReadCurrentSection(Manual * local_manual, char * path)
  */
 
   if ( (ptr = rindex(path, '.')) != NULL) {
-#if !defined(SCO) && !defined(ISC)
+#if !defined(__SCO__) && !defined(ISC)
     if (streq(ptr + 1, COMPRESSION_EXTENSION)) 
 #else
     if (strpbrk(ptr + 1, COMPRESSION_EXTENSIONS) != NULL)
@@ -475,7 +475,7 @@ ReadCurrentSection(Manual * local_manual, char * path)
  */
 
     if ( (ptr = rindex(full_name, '.')) != NULL) {
-#if !defined(SCO) && !defined(ISC)
+#if !defined(__SCO__) && !defined(ISC)
       if (streq(ptr + 1, COMPRESSION_EXTENSION)) 
 #else
       if (strpbrk(ptr + 1, COMPRESSION_EXTENSIONS) != NULL)
