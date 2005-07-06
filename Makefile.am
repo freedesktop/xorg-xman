@@ -60,19 +60,16 @@ dist_man_MANS = \
 
 appdefaultdir = $(sysconfdir)/X11/app-defaults
 
+if XAW_USE_XPRINT
+Xman: Xman-xprint.ad
+	ln -s $(top_srcdir)/Xman-xprint.ad Xman
+else
+Xman: Xman-noxprint.ad
+	ln -s $(top_srcdir)/Xman-noxprint.ad Xman
+endif
 
-APPDEFAULTFILES = \
-        Xman \
-        Xman-noxprint \
-        Xman-xprint
+appdefault_DATA = Xman
 
+EXTRA_DIST = Xman-xprint.ad Xman-noxprint.ad
 
-$(APPDEFAULTFILES): %: %.ad
-	cp $< $@
-
-appdefault_DATA = $(APPDEFAULTFILES)
-
-EXTRA_DIST = $(foreach FILE, $(APPDEFAULTFILES), $(FILE).ad)
-
-CLEANFILES = $(APPDEFAULTFILES)
-
+CLEANFILES = Xman

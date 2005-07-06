@@ -34,7 +34,7 @@ AC_PROG_INSTALL
 # Checks for pkg-config packages
 XAW_CHECK_XPRINT_SUPPORT(DEP)
 
-if test "x$XAW_HAS_XPRINT_SUPPORT" = "xyes" ; then
+if test "x$xaw_use_xprint" = "xyes" ; then
    PKG_CHECK_MODULES(XPRINT_UTIL, xprintutil)
 
    DEP_CFLAGS="$DEP_CFLAGS $XPRINT_UTIL_CFLAGS"
