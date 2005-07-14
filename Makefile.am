@@ -21,7 +21,7 @@
 
 bin_PROGRAMS = xman
 
-xman_CFLAGS = $(DEP_CFLAGS)
+xman_CFLAGS = $(DEP_CFLAGS) -D_BSD_SOURCE
 xman_LDADD = $(DEP_LIBS)
 
 xman_SOURCES =	\
