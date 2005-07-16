@@ -1,5 +1,5 @@
 /* $XConsortium: misc.c,v 1.31 94/12/16 21:36:53 gildea Exp $ */
-/* $XdotOrg: xc/programs/xman/misc.c,v 1.4 2004/06/08 02:44:35 gisburn Exp $ */
+/* $XdotOrg: xc/programs/xman/misc.c,v 1.6 2004/09/02 08:40:33 kem Exp $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -36,6 +36,10 @@ from the X Consortium.
  * Author:    Chris D. Peterson, MIT Project Athena
  * Created:   October 27, 1987
  */
+
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 
 #include "globals.h"
 #include "vendor.h"
