@@ -21,8 +21,8 @@
 
 bin_PROGRAMS = xman
 
-xman_CFLAGS = $(DEP_CFLAGS) -D_BSD_SOURCE
-xman_LDADD = $(DEP_LIBS)
+xman_CFLAGS = $(XMAN_CFLAGS) -D_BSD_SOURCE
+xman_LDADD = $(XMAN_LIBS)
 
 xman_SOURCES =	\
         buttons.c \
