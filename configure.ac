@@ -30,12 +30,67 @@ AM_CONFIG_HEADER(config.h)
 
 AC_PROG_CC
 AC_PROG_INSTALL
+AC_CANONICAL_HOST
 
 AC_CHECK_FUNC([mkstemp], 
    AC_DEFINE(HAS_MKSTEMP,1,[Define to 1 if you have the `mkstemp' function.]))
 
 # Checks for pkg-config packages
 XAW_CHECK_XPRINT_SUPPORT(XMAN)
+
+# Check for man page config files
+AC_CHECK_FILE([/etc/man.conf], [MANCONF="/etc/man.conf"], 
+    AC_CHECK_FILE([/etc/man.config], [MANCONF="/etc/man.config"], 
+	AC_CHECK_FILE([/etc/manpath.config], [MANCONF="/etc/manpath.config"])))
+	
+if test x$MANCONF != x ; then
+    AC_DEFINE_UNQUOTED(MANCONF, "$MANCONF", 
+	[Define to path to man config file if you have one])
+
+    # Try to determine format of config file
+    # would be better to somehow determine from the files themselves, but
+    # we'll guess based on pathname and OS for now (mirrors old Imake tests)
+    AC_MSG_CHECKING([man config file format])
+    if test x$MANCONF = x/etc/manpath.config ; then
+	MAN_CONFIG_STYLE="FreeBSD"
+    else
+	case $host_os in
+	*darwin* | *openbsd* | *netbsd* )
+	    MAN_CONFIG_STYLE="OpenBSD"
+	    ;;
+    	*linux* )
+	    MAN_CONFIG_STYLE="Linux"
+	    ;;
+        *bsd* )
+	    MAN_CONFIG_STYLE="BSD"
+	    ;;
+	*)
+	    ;;
+	esac
+    fi
+    AC_MSG_RESULT($MAN_CONFIG_STYLE)
+
+    case $MAN_CONFIG_STYLE in
+	FreeBSD)
+	    AC_DEFINE([MANCONFIGSTYLE_FreeBSD],1,
+		[Define to 1 if you have FreeBSD format manpath.config])
+	    ;;
+	OpenBSD)
+	    AC_DEFINE([MANCONFIGSTYLE_OpenBSD],1,
+		[Define to 1 if you have OpenBSD format manpath.config])
+	    ;;
+	BSD)
+	    AC_DEFINE([MANCONFIGSTYLE_BSD],1,
+		[Define to 1 if you have BSD format manpath.config])
+	    ;;
+	Linux)
+	    AC_DEFINE([MANCONFIGSTYLE_Linux],1,
+		[Define to 1 if you have Linux format man.conf or man.config])
+	    ;;
+	*)
+	    AC_MSG_ERROR([Could not determine man page file config format.])
+    esac
+fi
 
 if test "x$xaw_use_xprint" = "xyes" ; then
    PKG_CHECK_MODULES(XPRINT_UTIL, xprintutil)
