@@ -22,7 +22,7 @@ dnl
 dnl Process this file with autoconf to create configure.
 
 AC_PREREQ([2.57])
-AC_INIT(xman,[7.0], [xorg@freedesktop.org],xman)
+AC_INIT(xman,[0.99.0], [https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],xman)
 AM_INIT_AUTOMAKE([dist-bzip2])
 AM_MAINTAINER_MODE
 
@@ -101,5 +101,7 @@ fi
 
 AC_SUBST(XMAN_CFLAGS)
 AC_SUBST(XMAN_LIBS)
+
+XORG_RELEASE_VERSION
 
 AC_OUTPUT([Makefile])
