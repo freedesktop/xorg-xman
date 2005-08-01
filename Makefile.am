@@ -53,7 +53,7 @@ xman_SOURCES += \
         print.h
 endif
 
-dist_man_MANS = \
+dist_man1_MANS = \
         xman.man
 
 dist_data_DATA = xman.help
