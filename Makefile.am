@@ -60,7 +60,7 @@ dist_data_DATA = xman.help
 
 # App default files  (*.ad)
 
-appdefaultdir = $(sysconfdir)/X11/app-defaults
+appdefaultdir = $(libdir)/X11/app-defaults
 
 if XAW_USE_XPRINT
 Xman: Xman-xprint.ad
