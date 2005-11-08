@@ -83,7 +83,7 @@ from the X Consortium.
 #  define SYSMANPATH "/usr/share/man"
 #elif defined(hcx)
 #  define SYSMANPATH "/usr/catman/local_man:/usr/catman/u_man:/usr/catman/a_man:/usr/catman/p_man:/usr/catman/ada_man"
-#elif defined(SYSV) && defined(i386) && !defined(SCO)
+#elif defined(SYSV) && defined(i386) && !defined(__SCO__)
 #  define SYSMANPATH "/usr/catman/u_man:/usr/catman/p_man"
 #elif defined(sgi)
 #  define SYSMANPATH "/usr/catman/a_man:/usr/catman/g_man:/usr/catman/p_man:/usr/catman/u_man:/usr/man/p_man:/usr/man/u_man:/usr/man"
@@ -100,8 +100,8 @@ from the X Consortium.
  */
 
 #if defined( macII ) || defined( hcx ) || \
-	(defined(SYSV) && defined(i386) && !defined(ISC) && !defined(SCO)) || \
-	defined(sgi)
+	(defined(SYSV) && defined(i386) && !defined(ISC) && \
+	!defined(__UNIXWARE__) && !defined(__SCO__)) || defined(sgi)
 #  define COMPRESSION_EXTENSION   "z"
 #  define UNCOMPRESS_FORMAT       "pcat %s > %s"
 #  define NO_COMPRESS		/* mac can't handle using pack as a filter and
@@ -110,9 +110,9 @@ from the X Consortium.
 #  define COMPRESSION_EXTENSION "C"
 #  define UNCOMPRESS_FORMAT     "ccat < %s > %s"
 #  define COMPRESS              "compact"
-#elif defined (ISC) || defined(SCO)
+#elif defined (ISC) || defined(__SCO__) || defined(__UNIXWARE__)
 #  define COMPRESSION_EXTENSION   "Z"     /* dummy */
-#  ifndef SCO
+#  if !defined(__SCO__) && !defined(__UNIXWARE__)
 #    define COMPRESSION_EXTENSIONS  "zZF" /* pack, compress, freeze */
 #  else
 #    define COMPRESSION_EXTENSIONS  "zZ"  /* pack, compress */
