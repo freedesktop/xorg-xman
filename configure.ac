@@ -93,7 +93,7 @@ if test x$MANCONF != x ; then
 fi
 
 if test "x$xaw_use_xprint" = "xyes" ; then
-   PKG_CHECK_MODULES(XPRINT_UTIL, xprintutil)
+   PKG_CHECK_MODULES(XPRINT_UTIL, xprintutil xp)
 
    XMAN_CFLAGS="$XMAN_CFLAGS $XPRINT_UTIL_CFLAGS"
    XMAN_LIBS="$XMAN_LIBS $XPRINT_UTIL_LIBS"
