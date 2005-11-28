@@ -76,7 +76,7 @@ EXTRA_DIST = Xman-xprint.ad Xman-noxprint.ad
 
 CLEANFILES = Xman
 
-appmandir =  $(mandir)/man$(APP_MAN_SUFFIX)
+appmandir = $(APP_MAN_DIR)
 
 appman_DATA = $(appman_SOURCES:man=@APP_MAN_SUFFIX@)
 
