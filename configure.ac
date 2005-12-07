@@ -102,6 +102,10 @@ fi
 AC_SUBST(XMAN_CFLAGS)
 AC_SUBST(XMAN_LIBS)
 
+PKG_CHECK_MODULES(APPDEFS, xt)
+appdefaultdir=$(pkg-config --variable=appdefaultdir xt)
+AC_SUBST(appdefaultdir)
+
 XORG_MANPAGE_SECTIONS
 XORG_RELEASE_VERSION
 
