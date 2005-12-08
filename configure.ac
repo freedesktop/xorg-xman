@@ -35,6 +35,31 @@ AC_CANONICAL_HOST
 AC_CHECK_FUNC([mkstemp], 
    AC_DEFINE(HAS_MKSTEMP,1,[Define to 1 if you have the `mkstemp' function.]))
 
+AC_ARG_WITH(helpdir,
+        AC_HELP_STRING([--with-helpdir=<path>],
+                       [Set default directory for xman.help (default: ${datadir}/X11)]),
+        [HELPDIR="$withval"],
+        [HELPDIR=${datadir}/X11])
+AC_SUBST([HELPDIR])
+
+AC_ARG_WITH(sysmanpath,
+        AC_HELP_STRING([--with-sysmanpath=<path>],
+                       [Set default system man page search path]),
+        [SYSMANPATH="$withval"], [])
+if test x$SYSMANPATH != x; then
+    AC_DEFINE_UNQUOTED(SYSMANPATH, "$SYSMANPATH", 
+	[Default system man page search path (default: none)])
+fi
+
+AC_ARG_WITH(localmanpath,
+        AC_HELP_STRING([--with-localmanpath=<path>],
+                       [Set default local man page search path]),
+        [LOCALMANPATH="$withval"], [])
+if test x$LOCALMANPATH != x; then
+    AC_DEFINE_UNQUOTED(LOCALMANPATH, "$LOCALMANPATH", 
+	[Default local man page search path (default: none)])
+fi
+
 # Checks for pkg-config packages
 XAW_CHECK_XPRINT_SUPPORT(XMAN)
 

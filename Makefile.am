@@ -21,7 +21,10 @@
 
 bin_PROGRAMS = xman
 
-xman_CFLAGS = $(XMAN_CFLAGS) -D_BSD_SOURCE -DHELPFILE=\"$(datadir)/xman.help\"
+helpdir=@HELPDIR@
+dist_help_DATA = xman.help
+
+xman_CFLAGS = $(XMAN_CFLAGS) -D_BSD_SOURCE -DHELPFILE=\"$(helpdir)/xman.help\"
 xman_LDADD = $(XMAN_LIBS)
 
 xman_SOURCES =	\
@@ -55,8 +58,6 @@ endif
 
 appman_PRE = \
         xman.man
-
-dist_data_DATA = xman.help
 
 # App default files  (*.ad)
 
