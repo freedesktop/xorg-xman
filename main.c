@@ -1,4 +1,5 @@
 /* $XConsortium: main.c,v 1.23 94/04/17 20:43:55 rws Exp $ */
+/* $XdotOrg: $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -237,7 +238,7 @@ ArgError(int argc, char ** argv)
   "-helpfile <filename>",    "Specifies the helpfile to use.",
   "-bothshown",              "Show both the directory and manpage at once.",
   "-notopbox",               "Starts with manpage rather than topbox.",
-  "-geometery <geom>",       "Specifies the geometry of the top box.",
+  "-geometry <geom>",        "Specifies the geometry of the top box.",
   "=<geom>",                 "Specifies the geometry of the top box.",
   "-pagesize <geom>",        "Specifies the geometry of the manual page.",
   "-bw <pixels>",            "Width of all window borders.",
