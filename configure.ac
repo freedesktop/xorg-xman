@@ -63,11 +63,17 @@ fi
 # Checks for pkg-config packages
 XAW_CHECK_XPRINT_SUPPORT(XMAN)
 
+AC_ARG_WITH(manconfig,
+        AC_HELP_STRING([--with-manconfig=<filename>],
+                       [Set default system man configuration file]),
+        [MANCONF="$withval"], [])
+if test x$MANCONF = x; then
 # Check for man page config files
-AC_CHECK_FILE([/etc/man.conf], [MANCONF="/etc/man.conf"], 
-    AC_CHECK_FILE([/etc/man.config], [MANCONF="/etc/man.config"], 
-	AC_CHECK_FILE([/etc/manpath.config], [MANCONF="/etc/manpath.config"])))
-	
+    AC_CHECK_FILE([/etc/man.conf], [MANCONF="/etc/man.conf"], 
+                  AC_CHECK_FILE([/etc/man.config], [MANCONF="/etc/man.config"], 
+                                AC_CHECK_FILE([/etc/manpath.config], [MANCONF="/etc/manpath.config"])))
+fi
+
 if test x$MANCONF != x ; then
     AC_DEFINE_UNQUOTED(MANCONF, "$MANCONF", 
 	[Define to path to man config file if you have one])
