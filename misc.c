@@ -269,6 +269,14 @@ FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num)
       return(file);
   }
 #endif
+#ifdef LZMA_EXTENSION
+  {
+    sprintf(filename, "%s/%s%s/%s.%s", path, CAT,
+	    section + len_cat, page, LZMA_EXTENSION);
+    if ( (file = Uncompress(man_globals, filename)) != NULL)
+      return(file);
+  }
+#endif
 #else
   for(i = 0; i < strlen(COMPRESSION_EXTENSIONS); i++) {
       snprintf(filename, sizeof(filename), "%s/%s%s/%s.%c", path, CAT,
@@ -399,6 +407,12 @@ UncompressNamed(ManpageGlobals * man_globals, char * filename, char * output,
   if (streq(filename + strlen(filename) - strlen(BZIP2_EXTENSION),
 	    BZIP2_EXTENSION))
     sprintf(cmdbuf, BUNZIP2_FORMAT, filename, output);
+  else
+#endif
+#ifdef LZMA_EXTENSION
+  if (streq(filename + strlen(filename) - strlen(LZMA_EXTENSION),
+	    LZMA_EXTENSION))
+    sprintf(cmdbuf, UNLZMA_FORMAT, filename, output);
   else
 #endif
   snprintf(cmdbuf, sizeof(cmdbuf), UNCOMPRESS_FORMAT, filename, output);
@@ -828,6 +842,7 @@ UncompressUnformatted(ManpageGlobals * man_globals, char * entry,
   ParseEntry(entry, path, section, page);
 
   man_globals->bzip2 = FALSE;
+  man_globals->lzma = FALSE;
 
 #if defined(__OpenBSD__) || defined(__NetBSD__)
   /*
@@ -896,6 +911,24 @@ UncompressUnformatted(ManpageGlobals * man_globals, char * entry,
     }
   }
 #endif /* BZIP2_EXTENSION */
+
+#ifdef LZMA_EXTENSION
+ {
+    sprintf(input, "%s.%s", filename, LZMA_EXTENSION);
+#ifndef HAS_MKSTEMP
+    if ( UncompressNamed(man_globals, input, filename) ) {
+#else
+    if ( UncompressNamed(man_globals, input, filename, file) ) {
+#endif
+      man_globals->compress = TRUE;
+      man_globals->gzip = FALSE;
+      man_globals->lzma = TRUE;
+      sprintf(man_globals->save_file, "%s/%s%s/%s.%s", path,
+	      CAT, section + len_cat, page, LZMA_EXTENSION);
+      return(TRUE);
+    }
+  }
+#endif /* LZMA_EXTENSION */
 
 /*
  * Look for uncompressed file first.
@@ -979,6 +1012,23 @@ UncompressUnformatted(ManpageGlobals * man_globals, char * entry,
       man_globals->gzip = TRUE;
       sprintf(man_globals->save_file, "%s/%s%s/%s.%s", path,
 	      CAT, section + len_cat, page, BZIP2_EXTENSION);
+      return(TRUE);
+    }
+  }
+#endif
+
+#ifdef LZMA_EXTENSION
+  {
+    sprintf(input, "%s.%s", filename, LZMA_EXTENSION);
+#ifndef HAS_MKSTEMP
+    if ( UncompressNamed(man_globals, input, filename) ) {
+#else
+    if ( UncompressNamed(man_globals, input, filename, file) ) {
+#endif	
+      man_globals->compress = TRUE;
+      man_globals->lzma = TRUE;
+      sprintf(man_globals->save_file, "%s/%s%s/%s.%s", path,
+	      CAT, section + len_cat, page, LZMA_EXTENSION);
       return(TRUE);
     }
   }

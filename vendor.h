@@ -138,12 +138,16 @@ from the X Consortium.
 #  endif
 #  define GZIP_COMPRESS "gzip"
 #  define BZIP2_EXTENSION "bz2"
+#  define LZMA_EXTENSION "lzma"
 #  ifndef HAS_MKSTEMP
 #    define BUNZIP2_FORMAT "bunzip2 -c -d < %s > %s"
+#    define UNLZMA_FORMAT "unlzma -c -d < %s > %s"
 #  else
 #    define BUNZIP2_FORMAT "bunzip2 -c -d < %s >> %s"
+#    define UNLZMA_FORMAT "unlzma -c -d < %s >> %s"
 #  endif
 #  define BZIP2_COMPRESS "bzip2"
+#  define LZMA_COMPRESS "lzma"
 #endif
 
 

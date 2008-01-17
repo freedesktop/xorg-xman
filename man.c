@@ -451,6 +451,10 @@ ReadCurrentSection(Manual * local_manual, char * path)
     else if (streq(ptr + 1, BZIP2_EXTENSION))
       *ptr = '\0';
 #endif
+#ifdef LZMA_EXTENSION
+    else if (streq(ptr + 1, LZMA_EXTENSION))
+      *ptr = '\0';
+#endif
   }
   
   nentries = local_manual->nentries;
@@ -491,6 +495,10 @@ ReadCurrentSection(Manual * local_manual, char * path)
 #endif
 #ifdef BZIP2_EXTENSION
       else if (streq(ptr + 1, BZIP2_EXTENSION))
+	*ptr = '\0';
+#endif
+#ifdef LZMA_EXTENSION
+      else if (streq(ptr + 1, LZMA_EXTENSION))
 	*ptr = '\0';
 #endif
 #ifdef IGNORE_EXTENSION
