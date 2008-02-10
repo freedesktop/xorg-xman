@@ -137,6 +137,13 @@ from the X Consortium.
 #    define GUNZIP_FORMAT "gzip -c -d < %s >> %s"
 #  endif
 #  define GZIP_COMPRESS "gzip"
+#  define BZIP2_EXTENSION "bz2"
+#  ifndef HAS_MKSTEMP
+#    define BUNZIP2_FORMAT "bunzip2 -c -d < %s > %s"
+#  else
+#    define BUNZIP2_FORMAT "bunzip2 -c -d < %s >> %s"
+#  endif
+#  define BZIP2_COMPRESS "bzip2"
 #endif
 
 

@@ -255,6 +255,21 @@ FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num)
       return(file);
   }
 #endif
+#ifdef BZIP2_EXTENSION
+#if defined(__OpenBSD__) || defined(__NetBSD__)
+      /* look in machine subdir first */
+      snprintf(filename, sizeof(filename), "%s/%s%s/%s/%s.%s", path, CAT,
+	      section + len_cat, MACHINE, page, BZIP2_EXTENSION);
+      if ( (file = Uncompress(man_globals, filename)) != NULL)
+	  return(file);
+#endif
+  {
+    sprintf(filename, "%s/%s%s/%s.%s", path, CAT,
+	    section + len_cat, page, BZIP2_EXTENSION);
+    if ( (file = Uncompress(man_globals, filename)) != NULL)
+      return(file);
+  }
+#endif
 #else
   for(i = 0; i < strlen(COMPRESSION_EXTENSIONS); i++) {
       snprintf(filename, sizeof(filename), "%s/%s%s/%s.%c", path, CAT,
@@ -379,6 +394,12 @@ UncompressNamed(ManpageGlobals * man_globals, char * filename, char * output,
   if (streq(filename + strlen(filename) - strlen(GZIP_EXTENSION),
 	    GZIP_EXTENSION))
     snprintf(cmdbuf, sizeof(cmdbuf), GUNZIP_FORMAT, filename, output);
+  else
+#endif
+#ifdef BZIP2_EXTENSION
+  if (streq(filename + strlen(filename) - strlen(BZIP2_EXTENSION),
+	    BZIP2_EXTENSION))
+    sprintf(cmdbuf, BUNZIP2_FORMAT, filename, output);
   else
 #endif
   snprintf(cmdbuf, sizeof(cmdbuf), UNCOMPRESS_FORMAT, filename, output);
@@ -807,6 +828,8 @@ UncompressUnformatted(ManpageGlobals * man_globals, char * entry,
 
   ParseEntry(entry, path, section, page);
 
+  man_globals->bzip2 = FALSE;
+
 #if defined(__OpenBSD__) || defined(__NetBSD__)
   /*
    * look for uncompressed file in machine subdir first
@@ -856,6 +879,25 @@ UncompressUnformatted(ManpageGlobals * man_globals, char * entry,
   }
 #endif /* GZIP_EXTENSION */
 #endif /* __OpenBSD__ || __NetBSD__ */
+
+#ifdef BZIP2_EXTENSION
+ {
+    sprintf(input, "%s.%s", filename, BZIP2_EXTENSION);
+#ifndef HAS_MKSTEMP
+    if ( UncompressNamed(man_globals, input, filename) ) {
+#else
+    if ( UncompressNamed(man_globals, input, filename, file) ) {
+#endif
+      man_globals->compress = TRUE;
+      man_globals->gzip = FALSE;
+      man_globals->bzip2 = TRUE;
+      sprintf(man_globals->save_file, "%s/%s%s/%s.%s", path,
+	      CAT, section + len_cat, page, BZIP2_EXTENSION);
+      return(TRUE);
+    }
+  }
+#endif /* BZIP2_EXTENSION */
+
 /*
  * Look for uncompressed file first.
  */
@@ -925,6 +967,24 @@ UncompressUnformatted(ManpageGlobals * man_globals, char * entry,
     }
   }
 #endif
+
+#ifdef BZIP2_EXTENSION
+  {
+    sprintf(input, "%s.%s", filename, BZIP2_EXTENSION);
+#ifndef HAS_MKSTEMP
+    if ( UncompressNamed(man_globals, input, filename) ) {
+#else
+    if ( UncompressNamed(man_globals, input, filename, file) ) {
+#endif	
+      man_globals->compress = TRUE;
+      man_globals->gzip = TRUE;
+      sprintf(man_globals->save_file, "%s/%s%s/%s.%s", path,
+	      CAT, section + len_cat, page, BZIP2_EXTENSION);
+      return(TRUE);
+    }
+  }
+#endif
+
 /*
  * And lastly files in a compressed directory.
  */
