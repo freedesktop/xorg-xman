@@ -64,18 +64,18 @@ appman_PRE = \
 appdefaultdir = @appdefaultdir@
 
 if XAW_USE_XPRINT
-Xman: Xman-xprint.ad
-	ln -s $(top_srcdir)/Xman-xprint.ad Xman
+app-defaults/Xman: app-defaults/Xman-xprint.ad
+	ln -s Xman-xprint.ad app-defaults/Xman
 else
-Xman: Xman-noxprint.ad
-	ln -s $(top_srcdir)/Xman-noxprint.ad Xman
+app-defaults/Xman: app-defaults/Xman-noxprint.ad
+	ln -s Xman-noxprint.ad app-defaults/Xman
 endif
 
-appdefault_DATA = Xman
+appdefault_DATA = app-defaults/Xman
 
-EXTRA_DIST = Xman-xprint.ad Xman-noxprint.ad
+EXTRA_DIST = app-defaults/Xman-xprint.ad app-defaults/Xman-noxprint.ad
 
-CLEANFILES = Xman
+CLEANFILES = app-defaults/Xman
 
 appmandir = $(APP_MAN_DIR)
 
