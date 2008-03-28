@@ -24,7 +24,7 @@ bin_PROGRAMS = xman
 helpdir=@HELPDIR@
 dist_help_DATA = xman.help
 
-xman_CFLAGS = $(XMAN_CFLAGS) -D_BSD_SOURCE -DHELPFILE=\"$(helpdir)/xman.help\"
+AM_CFLAGS = $(XMAN_CFLAGS) -D_BSD_SOURCE -DHELPFILE=\"$(helpdir)/xman.help\"
 xman_LDADD = $(XMAN_LIBS)
 
 xman_SOURCES =	\
