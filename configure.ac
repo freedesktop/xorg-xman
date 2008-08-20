@@ -61,7 +61,7 @@ if test x$LOCALMANPATH != x; then
 fi
 
 # Checks for pkg-config packages
-XAW_CHECK_XPRINT_SUPPORT(XMAN)
+PKG_CHECK_MODULES(XMAN, xaw7)
 
 AC_ARG_WITH(manconfig,
         AC_HELP_STRING([--with-manconfig=<filename>],
