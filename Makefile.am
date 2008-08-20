@@ -50,12 +50,6 @@ xman_SOURCES =	\
         vendor.h \
         version.h
 
-if XAW_USE_XPRINT
-xman_SOURCES += \
-        print.c \
-        print.h
-endif
-
 appman_PRE = \
         xman.man
 
@@ -63,26 +57,16 @@ appman_PRE = \
 
 appdefaultdir = @appdefaultdir@
 
-if XAW_USE_XPRINT
-app-defaults/Xman: app-defaults/Xman-xprint.ad
-	ln -s Xman-xprint.ad app-defaults/Xman
-else
-app-defaults/Xman: app-defaults/Xman-noxprint.ad
-	ln -s Xman-noxprint.ad app-defaults/Xman
-endif
-
 appdefault_DATA = app-defaults/Xman
 
-EXTRA_DIST = app-defaults/Xman-xprint.ad app-defaults/Xman-noxprint.ad
-
-CLEANFILES = app-defaults/Xman
+EXTRA_DIST = app-defaults/Xman
 
 appmandir = $(APP_MAN_DIR)
 
 appman_DATA = $(appman_PRE:man=@APP_MAN_SUFFIX@)
 
 EXTRA_DIST += $(appman_PRE)
-CLEANFILES += $(appman_DATA)
+CLEANFILES = $(appman_DATA)
 
 SED = sed
 
