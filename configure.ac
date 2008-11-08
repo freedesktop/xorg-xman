@@ -71,7 +71,8 @@ if test x$MANCONF = x; then
 # Check for man page config files
     AC_CHECK_FILE([/etc/man.conf], [MANCONF="/etc/man.conf"], 
                   AC_CHECK_FILE([/etc/man.config], [MANCONF="/etc/man.config"], 
-                                AC_CHECK_FILE([/etc/manpath.config], [MANCONF="/etc/manpath.config"])))
+                                AC_CHECK_FILE([/etc/manpath.config], [MANCONF="/etc/manpath.config"],
+                                              AC_CHECK_FILE([/usr/share/misc/man.conf], [MANCONF="/usr/share/misc/man.conf"]))))
 fi
 
 if test x$MANCONF != x ; then
