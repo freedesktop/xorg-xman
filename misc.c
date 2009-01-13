@@ -81,7 +81,6 @@ static char *uncompress_formats[] =
  *	Returns: none
  */
 
-extern Widget top;
 static Widget warnShell, warnDialog;
 
 static void

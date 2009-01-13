@@ -26,14 +26,20 @@ AC_INIT(xman,[1.0.3], [https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],
 AM_INIT_AUTOMAKE([dist-bzip2])
 AM_MAINTAINER_MODE
 
+# Require xorg-macros: XORG_CWARNFLAGS, XORG_CHANGELOG
+m4_ifndef([XORG_MACROS_VERSION], [AC_FATAL([must install xorg-macros 1.2 or later before running autoconf/autogen])])
+XORG_MACROS_VERSION(1.2)
+
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_CANONICAL_HOST
 
+XORG_CWARNFLAGS
+
 AC_CHECK_FUNC([mkstemp], 
-   AC_DEFINE(HAS_MKSTEMP,1,[Define to 1 if you have the `mkstemp' function.]))
+   AC_DEFINE(HAS_MKSTEMP,1,[Define to 1 if you have the "mkstemp" function.]))
 
 AC_ARG_WITH(helpdir,
         AC_HELP_STRING([--with-helpdir=<path>],
@@ -123,22 +129,20 @@ if test x$MANCONF != x ; then
 	    AC_MSG_ERROR([Could not determine man page file config format.])
     esac
 fi
-
-if test "x$xaw_use_xprint" = "xyes" ; then
-   PKG_CHECK_MODULES(XPRINT_UTIL, xprintutil xp)
-
-   XMAN_CFLAGS="$XMAN_CFLAGS $XPRINT_UTIL_CFLAGS"
-   XMAN_LIBS="$XMAN_LIBS $XPRINT_UTIL_LIBS"
-fi
-
+XMAN_CFLAGS="$CWARNFLAGS $XMAN_CFLAGS"
 AC_SUBST(XMAN_CFLAGS)
 AC_SUBST(XMAN_LIBS)
 
 PKG_CHECK_MODULES(APPDEFS, xt)
-appdefaultdir=$(pkg-config --variable=appdefaultdir xt)
+xt_appdefaultdir=$(pkg-config --variable=appdefaultdir xt)
+AC_ARG_WITH(appdefaultdir,
+	AC_HELP_STRING([--with-appdefaultdir=<pathname>],
+	  [specify directory for app-defaults files (default is autodetected)]),
+	[appdefaultdir="$withval"], [appdefaultdir="${xt_appdefaultdir}"])
 AC_SUBST(appdefaultdir)
 
 XORG_MANPAGE_SECTIONS
 XORG_RELEASE_VERSION
+XORG_CHANGELOG
 
 AC_OUTPUT([Makefile])
