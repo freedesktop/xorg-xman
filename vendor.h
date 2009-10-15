@@ -59,7 +59,7 @@ from the X Consortium.
 #  define SEARCHDIR  MAN
 #endif
 
-#if ( defined(sgi) || (defined(i386) && (defined(SYSV) || defined(SVR4))  && !defined(sun)) || (defined(BSD) && (BSD >= 199103)) || defined(linux) )
+#if ( defined(sgi) || (defined(i386) && (defined(SYSV) || defined(SVR4))  && !defined(sun)) || (defined(BSD) && (BSD >= 199103)) || defined(linux) || defined(__CYGWIN__) )
 # define SEARCHOTHER CAT
 #endif
 
@@ -183,7 +183,7 @@ from the X Consortium.
 #  define FORMAT "| eqn | tbl | nroff -mandoc"
 # elif defined(BSD) && (BSD >= 199103)
 #  define FORMAT "| eqn | tbl | nroff -man"
-# elif defined(linux)
+# elif defined(linux) || defined(__CYGWIN__)
 #  define FORMAT "| pic | eqn | tbl -Tlatin1 | GROFF_NO_SGR= groff -Tlatin1 -mandoc"
 # else
 #  define FORMAT "| neqn | nroff -man"      /* The format command. */

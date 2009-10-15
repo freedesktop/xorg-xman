@@ -96,10 +96,10 @@ if test x$MANCONF != x ; then
 	*darwin* | *openbsd* | *netbsd* )
 	    MAN_CONFIG_STYLE="OpenBSD"
 	    ;;
-    	*linux* )
+	*linux* | cygwin* )
 	    MAN_CONFIG_STYLE="Linux"
 	    ;;
-        *bsd* )
+	*bsd* )
 	    MAN_CONFIG_STYLE="BSD"
 	    ;;
 	*)
