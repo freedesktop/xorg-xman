@@ -24,7 +24,8 @@ bin_PROGRAMS = xman
 helpdir=@HELPDIR@
 dist_help_DATA = xman.help
 
-AM_CFLAGS = $(XMAN_CFLAGS) -D_BSD_SOURCE -DHELPFILE=\"$(helpdir)/xman.help\"
+AM_CFLAGS = $(CWARNFLAGS) $(XMAN_CFLAGS) \
+	-D_BSD_SOURCE -DHELPFILE=\"$(helpdir)/xman.help\"
 xman_LDADD = $(XMAN_LIBS)
 
 xman_SOURCES =	\
@@ -90,7 +91,7 @@ MAN_SUBSTS = \
 SUFFIXES = .$(APP_MAN_SUFFIX) .man
 
 .man.$(APP_MAN_SUFFIX):
-	sed $(MAN_SUBSTS) < $< > $@
+	$(AM_V_GEN)$(SED) $(MAN_SUBSTS) < $< > $@
 
 EXTRA_DIST += ChangeLog
 MAINTAINERCLEANFILES = ChangeLog
