@@ -141,4 +141,10 @@ AC_ARG_WITH(appdefaultdir,
 	[appdefaultdir="$withval"], [appdefaultdir="${xt_appdefaultdir}"])
 AC_SUBST(appdefaultdir)
 
+XORG_RELEASE_VERSION
+
+if test "x$RELEASE_VERSION" != "x"; then
+	AC_DEFINE_UNQUOTED([RELEASE_VERSION], "$RELEASE_VERSION", 
+		[Release version string if set])
+fi
 AC_OUTPUT([Makefile])
