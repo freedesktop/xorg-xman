@@ -23,21 +23,20 @@ dnl Process this file with autoconf to create configure.
 
 AC_PREREQ([2.57])
 AC_INIT(xman, [1.1.0], [https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],xman)
-AM_INIT_AUTOMAKE([dist-bzip2])
+AM_INIT_AUTOMAKE([foreign dist-bzip2])
 AM_MAINTAINER_MODE
 
 # Require xorg-macros 1.3 or later: XORG_DEFAULT_OPTIONS
 m4_ifndef([XORG_MACROS_VERSION],
 	  [m4_fatal([must install xorg-macros 1.3 or later before running autoconf/autogen])])
 XORG_MACROS_VERSION(1.3)
+XORG_DEFAULT_OPTIONS
 
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_CANONICAL_HOST
-
-XORG_DEFAULT_OPTIONS
 
 AC_CHECK_FUNC([mkstemp], 
    AC_DEFINE(HAS_MKSTEMP,1,[Define to 1 if you have the "mkstemp" function.]))
@@ -140,8 +139,6 @@ AC_ARG_WITH(appdefaultdir,
 	  [specify directory for app-defaults files (default is autodetected)]),
 	[appdefaultdir="$withval"], [appdefaultdir="${xt_appdefaultdir}"])
 AC_SUBST(appdefaultdir)
-
-XORG_RELEASE_VERSION
 
 if test "x$RELEASE_VERSION" != "x"; then
 	AC_DEFINE_UNQUOTED([RELEASE_VERSION], "$RELEASE_VERSION", 
