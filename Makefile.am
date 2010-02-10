@@ -48,8 +48,7 @@ xman_SOURCES =	\
         search.c \
         tkfuncs.c \
         vendor.c \
-        vendor.h \
-        version.h
+        vendor.h
 
 appman_PRE = \
         xman.man
