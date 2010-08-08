@@ -66,8 +66,8 @@ if test x$LOCALMANPATH != x; then
 	[Default local man page search path (default: none)])
 fi
 
-# Checks for pkg-config packages
-PKG_CHECK_MODULES(XMAN, xaw7)
+# Obtain compiler/linker options from depedencies
+PKG_CHECK_MODULES(XMAN, xproto xaw7 xmu xt)
 
 AC_ARG_WITH(manconfig,
         AC_HELP_STRING([--with-manconfig=<filename>],
@@ -129,8 +129,6 @@ if test x$MANCONF != x ; then
 	    AC_MSG_ERROR([Could not determine man page file config format.])
     esac
 fi
-AC_SUBST(XMAN_CFLAGS)
-AC_SUBST(XMAN_LIBS)
 
 PKG_CHECK_MODULES(APPDEFS, xt)
 xt_appdefaultdir=`$PKG_CONFIG --variable=appdefaultdir xt`
