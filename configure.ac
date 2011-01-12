@@ -41,14 +41,14 @@ AC_CHECK_FUNC([mkstemp],
    AC_DEFINE(HAS_MKSTEMP,1,[Define to 1 if you have the "mkstemp" function.]))
 
 AC_ARG_WITH(helpdir,
-        AC_HELP_STRING([--with-helpdir=<path>],
+        AS_HELP_STRING([--with-helpdir=<path>],
                        [Set default directory for xman.help (default: ${datadir}/X11)]),
         [HELPDIR="$withval"],
         [HELPDIR=${datadir}/X11])
 AC_SUBST([HELPDIR])
 
 AC_ARG_WITH(sysmanpath,
-        AC_HELP_STRING([--with-sysmanpath=<path>],
+        AS_HELP_STRING([--with-sysmanpath=<path>],
                        [Set default system man page search path]),
         [SYSMANPATH="$withval"], [])
 if test x$SYSMANPATH != x; then
@@ -57,7 +57,7 @@ if test x$SYSMANPATH != x; then
 fi
 
 AC_ARG_WITH(localmanpath,
-        AC_HELP_STRING([--with-localmanpath=<path>],
+        AS_HELP_STRING([--with-localmanpath=<path>],
                        [Set default local man page search path]),
         [LOCALMANPATH="$withval"], [])
 if test x$LOCALMANPATH != x; then
@@ -69,7 +69,7 @@ fi
 PKG_CHECK_MODULES(XMAN, xproto xaw7 xmu xt)
 
 AC_ARG_WITH(manconfig,
-        AC_HELP_STRING([--with-manconfig=<filename>],
+        AS_HELP_STRING([--with-manconfig=<filename>],
                        [Set default system man configuration file]),
         [MANCONF="$withval"], [])
 if test x$MANCONF = x; then
@@ -132,7 +132,7 @@ fi
 PKG_CHECK_MODULES(APPDEFS, xt)
 xt_appdefaultdir=`$PKG_CONFIG --variable=appdefaultdir xt`
 AC_ARG_WITH(appdefaultdir,
-	AC_HELP_STRING([--with-appdefaultdir=<pathname>],
+	AS_HELP_STRING([--with-appdefaultdir=<pathname>],
 	  [specify directory for app-defaults files (default is autodetected)]),
 	[appdefaultdir="$withval"], [appdefaultdir="${xt_appdefaultdir}"])
 AC_SUBST(appdefaultdir)
