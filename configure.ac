@@ -141,4 +141,8 @@ if test "x$RELEASE_VERSION" != "x"; then
 	AC_DEFINE_UNQUOTED([RELEASE_VERSION], "$RELEASE_VERSION", 
 		[Release version string if set])
 fi
-AC_OUTPUT([Makefile])
+
+AC_CONFIG_FILES([
+	Makefile
+	man/Makefile])
+AC_OUTPUT
