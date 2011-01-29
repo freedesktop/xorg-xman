@@ -693,7 +693,7 @@ ConstructCommand(cmdbuf, path, filename, tempfile)
    FILE *file;
    char fmtbuf[128];
    int gotfmt = 0;             /* set to 1 if we got a directive from source */
-   char *fname = NULL;
+   char fname[PATH_MAX];
 #ifdef __UNIXOS2__
    int i;
 #endif
@@ -708,12 +708,9 @@ ConstructCommand(cmdbuf, path, filename, tempfile)
        * use system to get the thing to a known absoute filename.
        */
       if (filename[0] == '/') {
-         fname = filename;
+         snprintf(fname, sizeof(fname), "%s", filename);
       } else {
-         fname = malloc(strlen(path) + 1 + strlen(filename) + 1);
-         if (!fname)
-            return FALSE;
-         sprintf(fname, "%s/%s", path, filename);
+         snprintf(fname, sizeof(fname), "%s/%s", path, filename);
       }
       if ((file = fopen(fname, "r")) &&
           (fgets(fmtbuf, sizeof(fmtbuf), file)) &&
@@ -727,8 +724,6 @@ ConstructCommand(cmdbuf, path, filename, tempfile)
             gotfmt++;
          }
       }
-      if (fname && fname != filename)
-         free(fname);
       if (!gotfmt)                                /* not there or some error */
       {
          fmt = getenv("MANROFFSEQ");
