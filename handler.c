@@ -361,9 +361,8 @@ SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_para
   case 'c':
     break;
   default:
-    sprintf(error_buf,"%s %s", "Xman - SaveFormattedPagee:",
-	    "Unknown argument must be either 'Save' or 'Cancel'.");
-    PopupWarning(man_globals, error_buf);
+    PopupWarning(man_globals, "Xman - SaveFormattedPage: "
+		 "Unknown argument must be either 'Save' or 'Cancel'.");
     return;
   }
     
@@ -392,7 +391,6 @@ void
 GotoPage(Widget w, XEvent * event, String * params, Cardinal * num_params)
 {
   ManpageGlobals * man_globals;
-  char error_buf[BUFSIZ];
   Arg arglist[1];
   Boolean sensitive;
 
@@ -431,9 +429,9 @@ GotoPage(Widget w, XEvent * event, String * params, Cardinal * num_params)
     man_globals->dir_shown = TRUE;
     break;
   default:
-    sprintf(error_buf,"%s %s", "Xman - GotoPage: Unknown argument must be",
-	    "either Manpage or Directory.");
-    XtAppWarning(XtWidgetToApplicationContext(w), error_buf);
+    XtAppWarning(XtWidgetToApplicationContext(w),
+		 "Xman - GotoPage: Unknown argument must be "
+		 "either Manpage or Directory.");
     return;
   }
 }

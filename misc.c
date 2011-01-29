@@ -320,7 +320,7 @@ FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num)
 static FILE *
 Uncompress(ManpageGlobals * man_globals, char * filename)
 {
-  char tmp_file[BUFSIZ], error_buf[BUFSIZ];
+  char tmp_file[BUFSIZ];
   FILE * file;
 
 #ifndef HAS_MKSTEMP
@@ -328,15 +328,13 @@ Uncompress(ManpageGlobals * man_globals, char * filename)
     return(NULL);
 
   else if ((file = fopen(tmp_file, "r")) == NULL) {
-      sprintf(error_buf, "Something went wrong in retrieving the %s",
-	      "uncompressed manual page try cleaning up /tmp.");
-      PopupWarning(man_globals, error_buf);
+      PopupWarning(man_globals, "Something went wrong in retrieving the "
+		   "uncompressed manual page try cleaning up /tmp.");
   }
 #else
   if (!UncompressNamed(man_globals, filename, tmp_file, &file)) {
-      sprintf(error_buf, "Something went wrong in retrieving the %s",
-	      "uncompressed manual page try cleaning up /tmp.");
-      PopupWarning(man_globals, error_buf);
+      PopupWarning(man_globals, "Something went wrong in retrieving the "
+		   "uncompressed manual page try cleaning up /tmp.");
       return(NULL);
   }
 #endif
@@ -583,8 +581,7 @@ Format(ManpageGlobals * man_globals, char * entry)
 #else
   /* Handle more flexible way of specifying the formatting pipeline */
   if (! ConstructCommand(cmdbuf, path, filename, man_globals->tempfile)) {
-     sprintf(error_buf, "Constructed command was too long!");
-     PopupWarning(man_globals, error_buf);
+     PopupWarning(man_globals, "Constructed command was too long!");
      file = NULL;
   }
   else
@@ -599,9 +596,8 @@ Format(ManpageGlobals * man_globals, char * entry)
   else {
 #ifndef HAS_MKSTEMP
     if ((file = fopen(man_globals->tempfile,"r")) == NULL) {
-      sprintf(error_buf, "Something went wrong in retrieving the %s",
-	      "temp file, try cleaning up /tmp");
-      PopupWarning(man_globals, error_buf);
+      PopupWarning(man_globals, "Something went wrong in retrieving the "
+		   "temp file, try cleaning up /tmp");
     }
     else {
 #endif
