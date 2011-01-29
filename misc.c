@@ -90,7 +90,7 @@ PopdownWarning(Widget w, XtPointer client, XtPointer call)
 }
 
 void
-PopupWarning(ManpageGlobals * man_globals, char * string)
+PopupWarning(ManpageGlobals * man_globals, const char * string)
 {
   int n;
   Arg wargs[3];
