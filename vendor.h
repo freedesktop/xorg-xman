@@ -148,7 +148,7 @@ from the X Consortium.
  * The command filters for the manual and apropos searches.
  */
 
-#if (defined(hpux) || defined(macII) || defined(ultrix) || defined(hcx) )
+#if (defined(hpux) || defined(macII) || defined(hcx) )
 #  define NO_MANPATH_SUPPORT
 #endif
 
@@ -168,9 +168,7 @@ from the X Consortium.
 #endif
 
 #ifndef HANDLE_ROFFSEQ
-# if defined(ultrix)
-#  define FORMAT "| nroff -man" /* The format command. */
-# elif defined(CSRG_BASED)
+# if defined(CSRG_BASED)
 #  define FORMAT "| eqn | tbl | nroff -mandoc"
 # elif defined(BSD) && (BSD >= 199103)
 #  define FORMAT "| eqn | tbl | nroff -man"
