@@ -146,9 +146,6 @@ static SectionNameRec SectionNames[] = {
     {"(6) Games",                               "6"},
     {"(7) Miscellaneous",                       "7"},
     {"(8) Sys. Administration",                 "8"},
-#ifdef Lynx
-    {"(9) Device driver service calls",         "9"},
-#endif
 #if defined(__OpenBSD__) || defined(__NetBSD__)
     {"(9) Kernel Manual",                       "9"},
 #endif

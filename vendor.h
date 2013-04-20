@@ -53,11 +53,7 @@ from the X Consortium.
  * complete than the cat directories.
  */
 
-#if ( defined(UTEK) || defined(apollo) || defined(Lynx) )
-#  define SEARCHDIR  CAT
-#else
-#  define SEARCHDIR  MAN
-#endif
+#define SEARCHDIR  MAN
 
 #if ( defined(sgi) || (defined(i386) && (defined(SYSV) || defined(SVR4))  && !defined(sun)) || (defined(BSD) && (BSD >= 199103)) || defined(linux) || defined(__CYGWIN__) )
 # define SEARCHOTHER CAT
@@ -106,10 +102,6 @@ from the X Consortium.
 #  define UNCOMPRESS_FORMAT       "pcat %s > %s"
 #  define NO_COMPRESS           /* mac can't handle using pack as a filter and
                                    xman needs it to be done that way. */
-#elif defined(UTEK)
-#  define COMPRESSION_EXTENSION "C"
-#  define UNCOMPRESS_FORMAT     "ccat < %s > %s"
-#  define COMPRESS              "compact"
 #elif defined (ISC) || defined(__SCO__) || defined(__UNIXWARE__)
 #  define COMPRESSION_EXTENSION   "Z"           /* dummy */
 #  if !defined(__SCO__) && !defined(__UNIXWARE__)
