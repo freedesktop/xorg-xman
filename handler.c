@@ -369,10 +369,10 @@ SaveFormattedPage(Widget w, XEvent * event, String * params,
 
 /*
  * We do not need the filename anymore, and have the fd open.
- * We will unlink it.
+ * We will remove it.
  */
 
-    unlink(man_globals->tempfile);
+    remove(man_globals->tempfile);
     XtPopdown(XtParent(XtParent(w)));
 }
 

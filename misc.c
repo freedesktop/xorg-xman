@@ -345,7 +345,7 @@ Uncompress(ManpageGlobals * man_globals, const char *filename)
     }
 #endif
 
-    unlink(tmp_file);           /* remove name in tree, it will remain
+    remove(tmp_file);           /* remove name in tree, it will remain
                                    until we close the fd, however. */
     return (file);
 }
@@ -542,7 +542,7 @@ Format(ManpageGlobals * man_globals, const char *entry)
             if (strncmp(line, ".so ", 4) == 0) {
                 line[strlen(line) - 1] = '\0';
                 fclose(file);
-                unlink(filename);
+                remove(filename);
                 if (line[4] != '/') {
                     char *ptr = NULL;
 
@@ -617,7 +617,7 @@ Format(ManpageGlobals * man_globals, const char *entry)
 
             if ((man_globals->save == NULL) ||
                 (man_globals->manpagewidgets.manpage == NULL))
-                unlink(man_globals->tempfile);
+                remove(man_globals->tempfile);
             else {
                 char *ptr, catdir[BUFSIZ];
 
@@ -631,7 +631,7 @@ Format(ManpageGlobals * man_globals, const char *entry)
                     *ptr = '\0';
 
                     if (access(catdir, W_OK) != 0)
-                        unlink(man_globals->tempfile);
+                        remove(man_globals->tempfile);
                     else {
                         x = (Position) Width(man_globals->manpagewidgets.
                                              manpage) / 2;
@@ -644,7 +644,7 @@ Format(ManpageGlobals * man_globals, const char *entry)
                     }
                 }
                 else
-                    unlink(man_globals->tempfile);
+                    remove(man_globals->tempfile);
             }
 #ifndef HAS_MKSTEMP
         }
@@ -655,7 +655,7 @@ Format(ManpageGlobals * man_globals, const char *entry)
      * If the original was compressed or in another format, delete temporary file.
      */
     if (man_globals->deletetempfile)
-        unlink(filename);
+        remove(filename);
 
     return (file);
 }

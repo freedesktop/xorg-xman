@@ -234,11 +234,11 @@ DoSearch(ManpageGlobals * man_globals, int type)
             PrintError("lost temp file? out of temp space?");
 
 /*
- * Since we keep the FD open we can unlink the file safely, this
+ * Since we keep the FD open we can remove the file safely, this
  * will keep extra files out of /tmp.
  */
 
-        unlink(mantmp);
+        remove(mantmp);
 
         snprintf(string_buf, sizeof(string_buf), "%s: nothing appropriate",
                  search_string);
