@@ -75,8 +75,6 @@ from the X Consortium.
 #  define SYSMANPATH "/usr/share/man:/usr/X11/man:/usr/openwin/share/man:/usr/dt/share/man:/usr/sfw/share/man"
 #elif defined(SVR4) || defined(__osf__) || (defined(BSD) && (BSD >= 199103))
 #  define SYSMANPATH "/usr/share/man"
-#elif defined(hcx)
-#  define SYSMANPATH "/usr/catman/local_man:/usr/catman/u_man:/usr/catman/a_man:/usr/catman/p_man:/usr/catman/ada_man"
 #elif defined(SYSV) && defined(i386) && !defined(__SCO__) && !defined(sun)
 #  define SYSMANPATH "/usr/catman/u_man:/usr/catman/p_man"
 #elif defined(sgi)
@@ -93,8 +91,7 @@ from the X Consortium.
  * Compression Definitions.
  */
 
-#if defined( hcx ) || \
-	(defined(SYSV) && defined(i386) && !defined(ISC) && \
+#if (defined(SYSV) && defined(i386) && !defined(ISC) && \
 	!defined(__UNIXWARE__) && !defined(__SCO__) && !defined(sun)) || defined(sgi)
 #  define COMPRESSION_EXTENSION   "z"
 #  define UNCOMPRESS_FORMAT       "pcat %s > %s"
@@ -146,7 +143,7 @@ from the X Consortium.
  * The command filters for the manual and apropos searches.
  */
 
-#if (defined(hpux) || defined(hcx) )
+#if defined(hpux)
 #  define NO_MANPATH_SUPPORT
 #endif
 
@@ -211,11 +208,10 @@ from the X Consortium.
 #endif
 
 /*
- * The SYSV386, and HCX folks put the preformatted pages in the
+ * The SYSV386 folks put the preformatted pages in the
  * "man" directories.
  */
-#if (defined(hcx) || \
-	(defined(SYSV) && defined(i386))) && !defined(SCO) && !defined(sun)
+#if defined(SYSV) && defined(i386) && !defined(SCO) && !defined(sun)
 #  define CAT MAN
 #elif defined(SCO)
 #  define CAT "cat."
