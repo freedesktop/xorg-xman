@@ -47,7 +47,7 @@ static void CreateOptionMenu(ManpageGlobals * man_globals, Widget parent);
 static void CreateSectionMenu(ManpageGlobals * man_globals, Widget parent);
 static void StartManpage(ManpageGlobals * man_globals, Boolean help,
                          Boolean page);
-static Widget *ConvertNamesToWidgets(Widget parent, char **names);
+static Widget *ConvertNamesToWidgets(Widget parent, const char **names);
 
 /*	Function Name: MakeTopBox
  *	Description: This function creates the top menu, in a shell widget.
@@ -66,10 +66,10 @@ MakeTopBox(void)
     Arg arglist[TOPARGS];       /* An argument list */
     Cardinal num_args = 0;      /* The number of arguments. */
     ManpageGlobals *man_globals;
-    static char *full_size[] = {
+    static const char *full_size[] = {
         "topLabel", MANPAGE_BUTTON, NULL
     };
-    static char *half_size[] = {
+    static const char *half_size[] = {
         HELP_BUTTON, QUIT_BUTTON, NULL
     };
 
@@ -79,8 +79,8 @@ MakeTopBox(void)
     XtSetArg(arglist[num_args], XtNiconPixmap,
              XCreateBitmapFromData(XtDisplay(initial_widget),
                                    XtScreen(initial_widget)->root,
-                                   (char *) iconclosed_bits, iconclosed_width,
-                                   iconclosed_height));
+                                   (const char *) iconclosed_bits,
+                                   iconclosed_width, iconclosed_height));
     num_args++;
     XtSetArg(arglist[num_args], XtNtitle, resources.title);
     num_args++;
@@ -231,13 +231,13 @@ CreateManpageWidget(ManpageGlobals * man_globals,
     if (full_instance)
         XtSetArg(arglist[num_args], XtNiconPixmap,
                  XCreateBitmapFromData(XtDisplay(mytop), XtScreen(mytop)->root,
-                                       (char *) icon_open_bits, icon_open_width,
-                                       icon_open_height));
+                                       (const char *) icon_open_bits,
+                                       icon_open_width, icon_open_height));
     else
         XtSetArg(arglist[num_args], XtNiconPixmap,
                  XCreateBitmapFromData(XtDisplay(mytop), XtScreen(mytop)->root,
-                                       (char *) icon_help_bits, icon_help_width,
-                                       icon_help_height));
+                                       (const char *) icon_help_bits,
+                                       icon_help_width, icon_help_height));
     num_args++;
     XtSetValues(mytop, arglist, num_args);
 
@@ -431,7 +431,7 @@ CreateOptionMenu(ManpageGlobals * man_globals, Widget parent)
 {
     Widget menu, entry;
     int i;
-    static char *option_names[] = {     /* Names of the buttons. */
+    static const char *option_names[] = {     /* Names of the buttons. */
         DIRECTORY,
         MANPAGE,
         HELP,
@@ -659,7 +659,7 @@ MakeSaveWidgets(ManpageGlobals * man_globals, Widget parent)
  */
 
 void
-FormUpWidgets(Widget parent, char **full_size, char **half_size)
+FormUpWidgets(Widget parent, const char **full_size, const char **half_size)
 {
     Widget *full_widgets, *half_widgets, *temp, long_widget;
     Dimension longest, length, b_width;
@@ -741,9 +741,9 @@ FormUpWidgets(Widget parent, char **full_size, char **half_size)
  */
 
 static Widget *
-ConvertNamesToWidgets(Widget parent, char **names)
+ConvertNamesToWidgets(Widget parent, const char **names)
 {
-    char **temp;
+    const char **temp;
     Widget *ids, *temp_ids;
     int count;
 

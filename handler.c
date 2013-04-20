@@ -114,7 +114,7 @@ OptionCallback(Widget w, XtPointer pointer, XtPointer junk)
 static void
 ToggleBothShownState(ManpageGlobals * man_globals)
 {
-    char *label_str;
+    const char *label_str;
     Arg arglist[1];
 
     if (man_globals->both_shown == TRUE) {

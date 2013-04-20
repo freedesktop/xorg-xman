@@ -229,7 +229,7 @@ ArgError(int argc, char **argv)
 {
     int i;
 
-    static char **syntax, *syntax_def[] = {
+    static const char **syntax, *syntax_def[] = {
         "-help", "Print this message",
         "-helpfile <filename>", "Specifies the helpfile to use.",
         "-bothshown", "Show both the directory and manpage at once.",

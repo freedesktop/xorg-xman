@@ -86,10 +86,10 @@ MakeSearchWidget(ManpageGlobals * man_globals, Widget parent)
         PopupWarning(NULL,
                      "Could not find manual search widget in MakeSearchWidget.");
     else {
-        static char *half_size[] = {
+        static const char *half_size[] = {
             MANUALSEARCH, APROPOSSEARCH, NULL
         };
-        static char *full_size[] = {
+        static const char *full_size[] = {
             "label", "value", CANCEL, NULL
         };
 

@@ -212,7 +212,8 @@ ManpageGlobals *InitPsuedoGlobals(void);
 Widget CreateManpage(FILE * file);
 void CreateManpageWidget(ManpageGlobals * man_globals, char *name,
                          Boolean full_instance);
-void FormUpWidgets(Widget parent, char **full_size, char **half_size);
+void FormUpWidgets(Widget parent,
+                   const char **full_size, const char **half_size);
 void MakeDirectoryBox(ManpageGlobals * man_globals, Widget parent,
                       Widget * dir_disp, int section);
 void MakeSaveWidgets(ManpageGlobals * man_globals, Widget parent);
@@ -263,16 +264,16 @@ FILE *FindManualFile(ManpageGlobals * man_globals, int section_num,
 ManpageGlobals *GetGlobals(Widget w);
 
 void AddCursor(Widget w, Cursor cursor);
-void ChangeLabel(Widget w, char *str);
+void ChangeLabel(Widget w, const char *str);
 void OpenFile(ManpageGlobals * man_globals, FILE * file);
 void PopupWarning(ManpageGlobals * man_globals, const char *string);
 void PositionCenter(Widget widget, int x, int y, int above, int left,
                     int v_space, int h_space);
-void PrintError(char *string);
+void PrintError(const char *string);
 void RemoveGlobals(Widget w);
 void SaveGlobals(Widget w, ManpageGlobals * globals);
-void ParseEntry(char *entry, char *path, char *sect, char *page);
-FILE *Format(ManpageGlobals * man_globals, char *entry);
+void ParseEntry(const char *entry, char *path, char *sect, char *page);
+FILE *Format(ManpageGlobals * man_globals, const char *entry);
 
 /* search */
 FILE *DoSearch(ManpageGlobals * man_globals, int type);

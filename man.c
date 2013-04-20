@@ -353,8 +353,8 @@ ReadMandescFile(SectionList ** section_list, char *path)
  */
 
 void
-AddNewSection(SectionList ** list,
-              char *path, char *file, char *label, int flags)
+AddNewSection(SectionList ** list, const char *path, const char *file,
+              const char *label, int flags)
 {
     SectionList *local_list, *end;
     char full_path[BUFSIZ];

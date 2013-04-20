@@ -34,8 +34,8 @@ from the X Consortium.
 #include "vendor.h"
 
 typedef struct sectionName {
-    char *name;
-    char *suffix;
+    const char *name;
+    const char *suffix;
 } SectionNameRec;
 
 #if (defined(__osf__) || defined(SVR4)) && !defined(sun)
@@ -170,7 +170,7 @@ static SectionNameRec SectionNames[] = {
  */
 
 void
-AddStandardSections(SectionList ** list, char *path)
+AddStandardSections(SectionList ** list, const char *path)
 {
     register int i;
     char file[BUFSIZ];
@@ -202,7 +202,7 @@ AddStandardSections(SectionList ** list, char *path)
  */
 
 char *
-CreateManpageName(char *entry, int section,     /* FIXME: unused */
+CreateManpageName(const char *entry, int section,     /* FIXME: unused */
                   int flags)
 {
     char *cp;

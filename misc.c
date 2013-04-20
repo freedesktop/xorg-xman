@@ -46,22 +46,24 @@ from the X Consortium.
 #include <X11/Xaw/Dialog.h>
 #include <X11/Shell.h>
 
-static FILE *Uncompress(ManpageGlobals * man_globals, char *filename);
+static FILE *Uncompress(ManpageGlobals * man_globals, const char *filename);
 
 #ifndef HAS_MKSTEMP
-static Boolean UncompressNamed(ManpageGlobals * man_globals, char *filename,
-                               char *output);
+static Boolean UncompressNamed(ManpageGlobals * man_globals,
+                               const char *filename, char *output);
 static Boolean UncompressUnformatted(ManpageGlobals * man_globals,
-                                     char *entry, char *filename);
+                                     const char *entry, char *filename);
 #else
-static Boolean UncompressNamed(ManpageGlobals * man_globals, char *filename,
-                               char *output, FILE ** output_fd);
+static Boolean UncompressNamed(ManpageGlobals * man_globals,
+                               const char *filename, char *output,
+                               FILE ** output_fd);
 static Boolean UncompressUnformatted(ManpageGlobals * man_globals,
-                                     char *entry, char *filename, FILE ** file);
+                                     const char *entry, char *filename,
+                                     FILE ** file);
 #endif
 #ifdef HANDLE_ROFFSEQ
-static Boolean ConstructCommand(char *cmdbuf, char *path, char *filename,
-                                char *tempfile);
+static Boolean ConstructCommand(char *cmdbuf, const char *path,
+                                const char *filename, const char *tempfile);
 #endif
 
 #if defined(ISC) || defined(__SCO__) || defined(__UNIXWARE__)
@@ -140,7 +142,7 @@ PopupWarning(ManpageGlobals * man_globals, const char *string)
  */
 
 void
-PrintError(char *string)
+PrintError(const char *string)
 {
     fprintf(stderr, "Xman Error: %s\n", string);
     exit(EXIT_FAILURE);
@@ -197,7 +199,7 @@ FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num)
     FILE *file;
     char path[BUFSIZ], page[BUFSIZ], section[BUFSIZ], *temp;
     char filename[BUFSIZ];
-    char *entry = manual[section_num].entries[entry_num];
+    const char *entry = manual[section_num].entries[entry_num];
     int len_cat = strlen(CAT);
 
 #if defined(ISC) || defined(__SCO__) || defined(__UNIXWARE__)
@@ -322,7 +324,7 @@ FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num)
  */
 
 static FILE *
-Uncompress(ManpageGlobals * man_globals, char *filename)
+Uncompress(ManpageGlobals * man_globals, const char *filename)
 {
     char tmp_file[BUFSIZ];
     FILE *file;
@@ -359,11 +361,12 @@ Uncompress(ManpageGlobals * man_globals, char *filename)
 
 #ifndef HAS_MKSTEMP
 static Boolean
-UncompressNamed(ManpageGlobals * man_globals, char *filename, char *output)
+UncompressNamed(ManpageGlobals * man_globals, const char *filename,
+                char *output)
 #else
 static Boolean
-UncompressNamed(ManpageGlobals * man_globals, char *filename, char *output,
-                FILE ** output_fd)
+UncompressNamed(ManpageGlobals * man_globals, const char *filename,
+                char *output, FILE ** output_fd)
 #endif
 {
     char tmp[BUFSIZ], cmdbuf[BUFSIZ], error_buf[BUFSIZ];
@@ -501,7 +504,7 @@ SgmlToRoffNamed(ManpageGlobals * man_globals, char *filename, char *output,
 
 /* ARGSUSED */
 FILE *
-Format(ManpageGlobals * man_globals, char *entry)
+Format(ManpageGlobals * man_globals, const char *entry)
 {
     FILE *file = NULL;
 
@@ -670,8 +673,8 @@ Format(ManpageGlobals * man_globals, char *entry)
  *               be too long (more than BUFSIZ characters)
  */
 static Boolean
-ConstructCommand(cmdbuf, path, filename, tempfile)
-char *cmdbuf, *path, *filename, *tempfile;
+ConstructCommand(char *cmdbuf, const char *path,
+                 const char *filename, const char *tempfile)
 {
     /* The original code did the following to produce a command line:
      *   sprintf(cmdbuf,"cd %s ; %s %s %s > %s %s", path, TBL,
@@ -700,7 +703,7 @@ char *cmdbuf, *path, *filename, *tempfile;
     char *c = cmdbuf;           /* current posn in buffer */
     int left = BUFSIZ;          /* space left in buffer */
     int used;
-    char *fmt;
+    const char *fmt;
     FILE *file;
     char fmtbuf[128];
     int gotfmt = 0;             /* set to 1 if we got a directive from source */
@@ -725,12 +728,11 @@ char *cmdbuf, *path, *filename, *tempfile;
             (fgets(fmtbuf, sizeof(fmtbuf), file)) &&
             (!memcmp(fmtbuf, "'\\\" ", 4))) {
             /* that's squote-backslash-dquote-space */
-            int len;
+            int len = strlen(fmtbuf);
 
-            fmt = fmtbuf + 3;
-            len = strlen(fmt);
-            if (len && (fmt[len - 1] == '\n')) {
-                fmt[len - 1] = 0;
+            if (len && (fmtbuf[len - 1] == '\n')) {
+                fmtbuf[len - 1] = 0;
+                fmt = fmtbuf + 3;
                 gotfmt++;
             }
         }
@@ -752,7 +754,7 @@ char *cmdbuf, *path, *filename, *tempfile;
 
     /* Now add preprocessors of the form '| processor' */
     for (; *fmt; fmt++) {
-        char *filter;
+        const char *filter;
 
         switch (*fmt) {
         case 'e':
@@ -810,9 +812,10 @@ char *cmdbuf, *path, *filename, *tempfile;
 
 static Boolean
 #ifndef HAS_MKSTEMP
-UncompressUnformatted(ManpageGlobals * man_globals, char *entry, char *filename)
+UncompressUnformatted(ManpageGlobals * man_globals, const char *entry,
+                      char *filename)
 #else
-UncompressUnformatted(ManpageGlobals * man_globals, char *entry,
+UncompressUnformatted(ManpageGlobals * man_globals, const char *entry,
                       char *filename, FILE ** file)
 #endif
 {
@@ -1085,7 +1088,7 @@ AddCursor(Widget w, Cursor cursor)
  */
 
 void
-ChangeLabel(Widget w, char *str)
+ChangeLabel(Widget w, const char *str)
 {
     Arg arglist[3];             /* An argument list. */
 
@@ -1166,7 +1169,7 @@ PositionCenter(Widget widget, int x, int y, int above, int left, int v_space,
  */
 
 void
-ParseEntry(char *entry, char *path, char *sect, char *page)
+ParseEntry(const char *entry, char *path, char *sect, char *page)
 {
     char *c, temp[BUFSIZ];
 

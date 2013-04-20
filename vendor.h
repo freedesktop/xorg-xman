@@ -224,7 +224,7 @@ typedef struct _SectionList {
     int flags;
 } SectionList;
 
-extern char *CreateManpageName(char *entry, int section, int flags);
-extern void AddStandardSections(SectionList ** list, char *path);
-extern void AddNewSection(SectionList ** list, char *path, char *file,
-                          char *label, int flags);
+extern char *CreateManpageName(const char *entry, int section, int flags);
+extern void AddStandardSections(SectionList ** list, const char *path);
+extern void AddNewSection(SectionList ** list, const char *path,
+                          const char *file, const char *label, int flags);
