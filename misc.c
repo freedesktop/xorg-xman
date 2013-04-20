@@ -547,9 +547,9 @@ Format(ManpageGlobals * man_globals, const char *entry)
                     char *ptr = NULL;
 
                     strcpy(tmp, entry);
-                    if ((ptr = rindex(tmp, '/')) != NULL) {
+                    if ((ptr = strrchr(tmp, '/')) != NULL) {
                         *ptr = '\0';
-                        if ((ptr = rindex(tmp, '/')) != NULL)
+                        if ((ptr = strrchr(tmp, '/')) != NULL)
                             ptr[1] = '\0';
                     }
                 }
@@ -627,7 +627,7 @@ Format(ManpageGlobals * man_globals, const char *entry)
                  */
 
                 strcpy(catdir, man_globals->save_file);
-                if ((ptr = rindex(catdir, '/')) != NULL) {
+                if ((ptr = strrchr(catdir, '/')) != NULL) {
                     *ptr = '\0';
 
                     if (access(catdir, W_OK) != 0)
@@ -1175,32 +1175,32 @@ ParseEntry(const char *entry, char *path, char *sect, char *page)
 
     strcpy(temp, entry);
 
-    c = rindex(temp, '/');
+    c = strrchr(temp, '/');
     if (c == NULL)
-        PrintError("index failure in ParseEntry.");
+        PrintError("Failed to find / in ParseEntry.");
     *c++ = '\0';
     if (page != NULL)
         strcpy(page, c);
 
-    c = rindex(temp, '/');
+    c = strrchr(temp, '/');
     if (c == NULL)
-        PrintError("index failure in ParseEntry.");
+        PrintError("Failed to find / in ParseEntry.");
     *c++ = '\0';
 #if defined(SFORMAT) && defined(SMAN)
     /* sgmltoroff sometimes puts an extra ./ in the path to .so entries */
     if (strcmp(c, ".") == 0) {
-        c = rindex(temp, '/');
+        c = strrchr(temp, '/');
         if (c == NULL)
-            PrintError("index failure in ParseEntry.");
+            PrintError("Failed to find / in ParseEntry.");
         *c++ = '\0';
     }
 #endif
 #if defined(__OpenBSD__) || defined(__NetBSD__)
     /* Skip machine subdirectory if present */
     if (strcmp(c, MACHINE) == 0) {
-        c = rindex(temp, '/');
+        c = strrchr(temp, '/');
         if (c == NULL)
-            PrintError("index failure in ParseEntry.");
+            PrintError("Failed to find / in ParseEntry.");
         *c++ = '\0';
     }
 #endif

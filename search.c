@@ -380,12 +380,12 @@ BEntrySearch(char *string, char **first, int number)
 
         check = number / 2;
 
-        head = rindex(first[global_number + check], '/');
+        head = strrchr(first[global_number + check], '/');
         if (head == NULL)
             PrintError("index failure in BEntrySearch");
         head++;
 
-        tail = rindex(head, '.');
+        tail = strrchr(head, '.');
         if (tail == NULL)
             /* not an error, some systems (e.g. sgi) have only a .z suffix */
             tail = head + strlen(head);

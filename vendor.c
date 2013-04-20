@@ -211,7 +211,7 @@ CreateManpageName(const char *entry, int section,     /* FIXME: unused */
 
     ParseEntry(entry, NULL, sect, page);
 
-    if ((cp = rindex(page, '.')) != NULL) {
+    if ((cp = strrchr(page, '.')) != NULL) {
         if ((int) strlen(cp) > 2) {
             *cp++ = '(';
             while ((cp[1] != '\0')) {

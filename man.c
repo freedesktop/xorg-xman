@@ -110,7 +110,7 @@ Man(void)
  * open to look for manual pages.  The ``mandesc'' file is read here.
  */
 
-    for (path = manpath; (ptr = index(path, ':')) != NULL; path = ++ptr) {
+    for (path = manpath; (ptr = strchr(path, ':')) != NULL; path = ++ptr) {
         *ptr = '\0';
         if (lang != NULL) {
             strcpy(buf, path);
@@ -297,13 +297,13 @@ ReadMandescFile(SectionList ** section_list, char *path)
                 continue;
             }
 
-            if ((cp = index(string, '\t')) != NULL) {
+            if ((cp = strchr(string, '\t')) != NULL) {
                 char *s;
 
                 *cp++ = '\0';
                 strcpy(local_file, MAN);
                 strcat(local_file, string);
-                if ((s = index(cp, '\t')) != NULL) {
+                if ((s = strchr(cp, '\t')) != NULL) {
                     *s++ = '\0';
                     if (streq(s, SUFFIX))
                         AddNewSection(section_list, path, local_file, cp,
@@ -431,7 +431,7 @@ ReadCurrentSection(Manual * local_manual, char *path)
  * Remove the compression extension from the path name.
  */
 
-    if ((ptr = rindex(path, '.')) != NULL) {
+    if ((ptr = strrchr(path, '.')) != NULL) {
 #if !defined(__SCO__) && !defined(ISC)
         if (streq(ptr + 1, COMPRESSION_EXTENSION))
 #else
@@ -460,7 +460,7 @@ ReadCurrentSection(Manual * local_manual, char *path)
 
         if (name[0] == '.')
             continue;
-        if (index(name, '.') == NULL)
+        if (strchr(name, '.') == NULL)
             continue;
         if (nentries >= nalloc) {
             nalloc += ENTRYALLOC;
@@ -477,7 +477,7 @@ ReadCurrentSection(Manual * local_manual, char *path)
  * Remove the compression extension from the entry name.
  */
 
-        if ((ptr = rindex(full_name, '.')) != NULL) {
+        if ((ptr = strrchr(full_name, '.')) != NULL) {
 #if !defined(__SCO__) && !defined(ISC)
             if (streq(ptr + 1, COMPRESSION_EXTENSION))
 #else
@@ -505,7 +505,7 @@ ReadCurrentSection(Manual * local_manual, char *path)
         }
         local_manual->entries[nentries] = XtNewString(full_name);
         local_manual->entries_less_paths[nentries] =
-            rindex(local_manual->entries[nentries], '/');
+            strrchr(local_manual->entries[nentries], '/');
         if (local_manual->entries_less_paths[nentries] == NULL)
             PrintError("Internal error while cataloging manual pages.");
         ++nentries;
@@ -543,7 +543,7 @@ SortAndRemove(Manual * man, int number)
         /* temporarily remove suffixes of entries, preventing them from */
         /* being used in alphabetic comparison ie sccs-delta.1 vs sccs.1 */
         for (i2 = 0; i2 < man->nentries; i2++)
-            if ((s1[i2] = rindex(man->entries_less_paths[i2], '.')) != NULL)
+            if ((s1[i2] = strrchr(man->entries_less_paths[i2], '.')) != NULL)
                 *s1[i2] = '\0';
 
         sortstrs((Byte **) man->entries_less_paths, man->nentries,
