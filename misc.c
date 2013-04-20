@@ -1,5 +1,3 @@
-/* $XConsortium: misc.c,v 1.31 94/12/16 21:36:53 gildea Exp $ */
-/* $XdotOrg: xc/programs/xman/misc.c,v 1.6 2004/09/02 08:40:33 kem Exp $ */
 /*
 
 Copyright (c) 1987, 1988  X Consortium
@@ -29,7 +27,6 @@ other dealings in this Software without prior written authorization
 from the X Consortium.
 
 */
-/* $XFree86: xc/programs/xman/misc.c,v 1.10 2003/08/02 17:35:48 herrb Exp $ */
 
 /*
  * xman - X window system manual page display program.
