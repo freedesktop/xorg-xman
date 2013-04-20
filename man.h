@@ -266,7 +266,7 @@ void OpenFile(ManpageGlobals * man_globals, FILE * file);
 void PopupWarning(ManpageGlobals * man_globals, const char *string);
 void PositionCenter(Widget widget, int x, int y, int above, int left,
                     int v_space, int h_space);
-void PrintError(const char *string);
+void PrintError(const char *string) _X_NORETURN;
 void RemoveGlobals(Widget w);
 void SaveGlobals(Widget w, ManpageGlobals * globals);
 void ParseEntry(const char *entry, char *path, char *sect, char *page);

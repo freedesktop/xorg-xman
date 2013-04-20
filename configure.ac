@@ -66,7 +66,7 @@ if test x$LOCALMANPATH != x; then
 fi
 
 # Obtain compiler/linker options from depedencies
-PKG_CHECK_MODULES(XMAN, xproto xaw7 xt)
+PKG_CHECK_MODULES(XMAN, [xproto >= 7.0.17 xaw7 xt])
 
 AC_ARG_WITH(manconfig,
         AS_HELP_STRING([--with-manconfig=<filename>],
