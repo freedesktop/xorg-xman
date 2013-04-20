@@ -69,9 +69,6 @@ from the X Consortium.
 
 #include "defs.h"
 
-/* Turn a NULL pointer string into an empty string */
-#define NULLSTR(x) (((x)!=NULL)?(x):(""))
-
 #define Error(x) { printf x ; exit(EXIT_FAILURE); }
 #define Assertion(expr, msg) { if (!(expr)) { Error msg } }
 #ifdef DEBUG
