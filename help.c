@@ -49,7 +49,7 @@ Boolean
 MakeHelpWidget(void)
 {
 
-  ManpageGlobals * man_globals;	/* The psuedo global structure. */
+  ManpageGlobals * man_globals;	/* The pseudo global structure. */
   
   if (help_widget != NULL)	/* If we already have a help widget. 
 				   then do not create one. */
@@ -88,7 +88,7 @@ MakeHelpWidget(void)
 
 /*	Function Name: OpenHelpfile
  *	Description: opens the helpfile.
- *	Arguments: man_globals - the psuedo globals structure.
+ *	Arguments: man_globals - the pseudo globals structure.
  *	Returns: False if no helpfile was found.
  */
 
@@ -99,7 +99,7 @@ OpenHelpfile(ManpageGlobals * man_globals)
 
   if( (help_file_ptr = fopen(resources.help_file, "r")) == NULL ) {
     PopupWarning(man_globals,
-		 "Could not open help file, NO HELP WILL BE AVALIABLE.");
+		 "Could not open help file, NO HELP WILL BE AVAILABLE.");
     return(FALSE);
   }
     

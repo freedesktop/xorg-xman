@@ -60,7 +60,7 @@ static void ToggleBothShownState(ManpageGlobals * man_globals);
 /*	Function Name: OptionCallback
  *	Description: This is the callback function for the callback menu.
  *	Arguments: w - the widget we are calling back from. 
- *                 globals_pointer - a pointer to the psuedo globals structure
+ *                 globals_pointer - a pointer to the pseudo globals structure
  *                                  for this manpage.
  *                 junk - (call data) not used.
  *	Returns: none.
@@ -166,7 +166,7 @@ ToggleBothShownState(ManpageGlobals * man_globals)
  *	Returns: none
  */
 
-/* How far off the top of the widget to have the initial cursor postion. */
+/* How far off the top of the widget to have the initial cursor position. */
 
 #define OFF_OF_TOP 25
 
@@ -187,7 +187,7 @@ Popup(Widget w, XtGrabKind grab_kind)
 
 /*	Function Name: PutUpManpage
  *	Description: Puts the manpage on the display.
- *	Arguments: man_globals - a pointer to the psuedo globals structure
+ *	Arguments: man_globals - a pointer to the pseudo globals structure
  *                                  for this manpage.
  *                 file - the file to display.
  *	Returns: none.
@@ -216,7 +216,7 @@ PutUpManpage(ManpageGlobals * man_globals, FILE * file)
 /*	Function Name: DirectoryHandler
  *	Description: This is the callback function for the directory listings.
  *	Arguments: w - the widget we are calling back from. 
- *                 global_pointer - the pointer to the psuedo global structure
+ *                 global_pointer - the pointer to the pseudo global structure
  *                                  associated with this manpage.
  *                 ret_val - return value from the list widget.
  *	Returns: none.
@@ -240,7 +240,7 @@ DirectoryHandler(Widget w, XtPointer global_pointer, XtPointer ret_val)
 /*	Function Name: DirPopupCallback
  *	Description: This is the callback function for the callback menu.
  *	Arguments: w - the widget we are calling back from. 
- *                 pointer - a pointer to the psuedo globals structure
+ *                 pointer - a pointer to the pseudo globals structure
  *                                  for this manpage.
  *                 junk - (call data) not used.
  *	Returns: none.
@@ -295,7 +295,7 @@ DirPopupCallback(Widget w, XtPointer pointer, XtPointer junk)
  *	Description: This is the action routine may save the manpage.
  *      Arguments: w - any widget in the widget tree.
  *                 event - NOT USED.
- *                 params, num_params - the parameters paseed to the action
+ *                 params, num_params - the parameters passed to the action
  *                                      routine, can be either Manpage or
  *                                      Directory.
  *      Returns: none.
@@ -380,7 +380,7 @@ SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_para
  *                   or directory.
  *      Arguments: w - any widget in the widget tree.
  *                 event - NOT USED.
- *                 params, num_params - the parameters paseed to the action
+ *                 params, num_params - the parameters passed to the action
  *                                      routine, can be either Manpage or
  *                                      Directory.
  *      Returns: none.

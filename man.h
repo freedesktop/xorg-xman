@@ -127,13 +127,13 @@ typedef struct tManual {
   int flags;			/* suffix, fold */
 } Manual;
    
-/* psuedo Globals that are specific to each manpage created. */
+/* pseudo Globals that are specific to each manpage created. */
 
 typedef struct _ManpageGlobals{
   int current_directory;	/* The directory currently being shown 
 				   on this manpage. */
   Boolean dir_shown,		/* True if the directory is then current
-				   visable screen */
+				   visible screen */
     both_shown;			/* If true then both the manpage and
 				   the directory are to be shown.*/
   Widget label,			/* The label widget at the top of the page. */
@@ -159,7 +159,7 @@ typedef struct _ManpageGlobals{
 
   char manpage_title[80];       /* The label to use for the current manpage. */
 
-  char save_file[80];		/* the name of the file to save fomatted 
+  char save_file[80];		/* the name of the file to save formatted
 				   page into. */
   char tempfile[80];		/* the name of the file to copy the formatted
 				   page from. */
@@ -202,7 +202,7 @@ typedef struct _Xman_Resources {
 
 /************************************************************
  *
- * Function Defintions 
+ * Function Definitions
  * 
  ************************************************************/
 

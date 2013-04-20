@@ -298,7 +298,7 @@ PaintText(Widget w, int y_loc, int height)
 } 
 
 /*	Function Name: Page
- *	Description: This function pages the widget, by the amount it recieves
+ *	Description: This function pages the widget, by the amount it receives
  *                   from the translation Manager.
  *	Arguments: w - the ScrollByLineWidget.
  *                 event - the event that caused this return.
@@ -318,7 +318,7 @@ Page(Widget w, XEvent * event, String * params, Cardinal *num_params)
      return;
 /*
  * If no scroll bar is visible then do not page, as the entire window is shown,
- * of scrolling has been turned off. 
+ * or scrolling has been turned off.
  */
 
    if (bar == (Widget) NULL)
@@ -490,7 +490,7 @@ MoveAndClearText(Widget w, int old_y, int height, int new_y)
   if (old_y > new_y)
     height -= sblw->scroll.font_height/2;  /* clear 1/2 font of extra space,
 					      to make sure we don't lose or
-					      gain decenders. */
+					      gain descenders. */
   else
     height -= sblw->scroll.font_height;  /* clear 1 font of extra space,
 					    to make sure we don't overwrite
@@ -580,7 +580,7 @@ VerticalJump(Widget w, XtPointer junk, XtPointer percent_ptr)
 }
 
 /*	Function Name: VerticalScroll
- *	Description: This function moves the postition of the interior window
+ *	Description: This function moves the position of the interior window
  *                   as the vertical scroll bar is moved.
  *	Arguments: w - the scrollbar widget.
  *                 junk - not used.
@@ -729,7 +729,7 @@ SetValuesHook(Widget w, ArgList args, Cardinal *num_args)
   }
 
 /*
- * Changing anthing else will have strange effects, I don't need it so
+ * Changing anything else will have strange effects, I don't need it so
  * I didn't code it.
  */
 
@@ -738,7 +738,7 @@ SetValuesHook(Widget w, ArgList args, Cardinal *num_args)
 } /* Set Values */
 
 /* 
- * A little design philosophy is probabally wise to include at this point.
+ * A little design philosophy is probably wise to include at this point.
  *
  * One of the things that I has hoped to achieve with xman is to make the
  * viewing of manpage not only easy for the nieve user, but also fast for
@@ -752,11 +752,11 @@ SetValuesHook(Widget w, ArgList args, Cardinal *num_args)
  * METHOD:
  *
  * I allocate a chunk of space that is the size of the file, plus a null for
- * debugging.  Then copiesthe file into this chunk of memory.  I then allocate
+ * debugging.  Then copies the file into this chunk of memory. I then allocate
  * an array of char*'s that are assigned to the beginning of each line.  Yes,
- * this means that I have to read the file twice, and could probabally be more
+ * this means that I have to read the file twice, and could probably be more
  * clever about it, but once it is in memory the second read is damn fast.
- * There are a few obsucrities here about guessing the number of lines and
+ * There are a few obscurities here about guessing the number of lines and
  * reallocing if I guess wrong, but other than that it is pretty straight 
  * forward.
  *
@@ -899,7 +899,7 @@ PrintText(Widget w, int start_line, int num_lines, int location)
   ScrollByLineWidget sblw = (ScrollByLineWidget) w;
 
   register char *bufp, *c;	/* Generic char pointers */
-  int current_line;		/* the number of the currrent line */
+  int current_line;		/* the number of the current line */
   char buf[BUFSIZ];		/* Misc. characters */
   Boolean italicflag = FALSE;	/* Print text in italics?? */
   Boolean first = TRUE;	        /* First line of a manual page??? */
@@ -1008,7 +1008,7 @@ PrintText(Widget w, int start_line, int num_lines, int location)
 
 /*
  * This tab handling code is not very clever it moves the cursor over
- * to the next boundry of eight (8) spaces, as calculated in width just
+ * to the next boundary of eight (8) spaces, as calculated in width just
  * before the printing loop started.
  */
 

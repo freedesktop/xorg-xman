@@ -38,7 +38,7 @@ Xman_Resources resources;	/* Resource manager sets these. */
 
 Widget help_widget;		/* The help widget. */
 
-int default_height,default_width; /* Approximately the default with and
+int default_height,default_width; /* Approximately the default width and
 					    height, of the manpage when shown,
 					    the the top level manual page 
 					    window */

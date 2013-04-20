@@ -219,7 +219,7 @@ int main(int argc, char ** argv)
 }
 
 /*	Function Name: ArgError
- *	Description:  Prints error message about unknow arguments.
+ *	Description:  Prints error message about unknown arguments.
  *	Arguments: argc, argv - args not understood.
  *	Returns: none.
  */

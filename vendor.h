@@ -66,7 +66,7 @@ from the X Consortium.
 /*
  * The default manual page directory.
  *
- * The MANPATH enviornment variable will override this.
+ * The MANPATH environment variable will override this.
  */
 
 #ifndef SYSMANPATH

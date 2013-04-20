@@ -76,7 +76,7 @@ static char *uncompress_formats[] =
 #endif
 
 /*	Function Name: PopupWarning
- *	Description: This function pops upa warning message.
+ *	Description: This function pops up a warning message.
  *	Arguments: string - the specific warning string.
  *	Returns: none
  */
@@ -134,7 +134,7 @@ PopupWarning(ManpageGlobals * man_globals, const char * string)
 /*	Function Name: PrintError
  *	Description: This Function prints an error message and exits.
  *	Arguments: string - the specific message.
- *	Returns: none. - exits tho.
+ *	Returns: none. - exits though.
  */
 
 void
@@ -145,7 +145,7 @@ PrintError(char * string)
 }
 
 /*	Function Name: OpenFile
- *	Description: Assignes a file to the manpage.
+ *	Description: Assigns a file to the manpage.
  *	Arguments: man_globals - global structure.
  *                 file        - the file pointer.
  *	Returns: none
@@ -178,7 +178,7 @@ OpenFile(ManpageGlobals * man_globals, FILE * file)
  *
  * NOTES:
  *
- * If there is a uncompressed section it will look there for uncompresed
+ * If there is a uncompressed section it will look there for uncompressed
  * manual pages first and then for individually compressed file in the
  * uncompressed section.
  *
@@ -312,7 +312,7 @@ FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num)
 /*	Function Namecompress
  *	Description: This function will attempt to find a compressed man
  *                   page and uncompress it.
- *	Arguments: man_globals - the psuedo global info.
+ *	Arguments: man_globals - the pseudo global info.
  *                 filename - name of file to uncompress.
  *	Returns:; a pointer to the file or NULL.
  */
@@ -347,7 +347,7 @@ Uncompress(ManpageGlobals * man_globals, char * filename)
 /*	Function Name: UncompressNamed
  *	Description: This function will attempt to find a compressed man
  *                   page and uncompress it.
- *	Arguments: man_globals - the psuedo global info.
+ *	Arguments: man_globals - the pseudo global info.
  *                 filename - name of file to uncompress.
  * RETURNED        output - the file name output (must be an allocated string).
  *	Returns:; TRUE if the file was found.
@@ -368,7 +368,7 @@ UncompressNamed(ManpageGlobals * man_globals, char * filename, char * output,
   int fd;
 #endif
 
-  if (stat(filename, &junk) != 0) { /* Check for existance of the file. */
+  if (stat(filename, &junk) != 0) { /* Check for existence of the file. */
     if (errno != ENOENT) {
       snprintf(error_buf, sizeof(error_buf),
 	       "Error while stating file %s, errno = %d", filename, errno);
@@ -378,7 +378,7 @@ UncompressNamed(ManpageGlobals * man_globals, char * filename, char * output,
   }
 
 /*
- * Using stdin is necessary to fool zcat since we cannot guarentee
+ * Using stdin is necessary to fool zcat since we cannot guarantee
  * the .Z extension.
  */
 
@@ -427,7 +427,7 @@ UncompressNamed(ManpageGlobals * man_globals, char * filename, char * output,
 /*	Function Name: SgmlToRoffNamed
  *	Description: This function will attempt to find an SGML man
  *                   page and convert it to roff format.
- *	Arguments: man_globals - the psuedo global info.
+ *	Arguments: man_globals - the pseudo global info.
  *                 filename - name of file to uncompress.
  * RETURNED        output - the file name output (must be an allocated string).
  *	Returns:; TRUE if the file was found.
@@ -448,7 +448,7 @@ SgmlToRoffNamed(ManpageGlobals * man_globals, char * filename, char * output,
   int fd;
 #endif
 
-  if (stat(filename, &junk) != 0) { /* Check for existance of the file. */
+  if (stat(filename, &junk) != 0) { /* Check for existence of the file. */
     if (errno != ENOENT) {
       snprintf(error_buf, sizeof(error_buf),
 	       "Error while stating file %s, errno = %d", filename, errno);
@@ -482,9 +482,9 @@ SgmlToRoffNamed(ManpageGlobals * man_globals, char * filename, char * output,
 #endif /* defined (SMAN) && defined(SFORMAT) */
 
 /*	Function Name: Format
- *	Description: This funtion formats the manual pages and interfaces
+ *	Description: This function formats the manual pages and interfaces
  *                   with the user.
- *	Arguments: man_globals - the psuedo globals
+ *	Arguments: man_globals - the pseudo globals
  *                 file - the file pointer to use and return
  *                 entry - the current entry struct.
  *                 current_box - The current directory being displayed.
@@ -611,7 +611,7 @@ Format(ManpageGlobals * man_globals, char * entry)
 	char * ptr, catdir[BUFSIZ];
 
 	/*
-	 * If the catdir is writeable then ask the user if he/she wants to
+	 * If the catdir is writable then ask the user if he/she wants to
 	 * write the man page to it.
 	 */
 
@@ -702,7 +702,7 @@ ConstructCommand(cmdbuf, path, filename, tempfile)
    if (!fmt) {
       /* This is the tricky bit: extract a format string from the source file
        * Annoyingly, filename might be relative or absolute. We cheat and
-       * use system to get the thing to a known absoute filename.
+       * use system to get the thing to a known absolute filename.
        */
       if (filename[0] == '/') {
          snprintf(fname, sizeof(fname), "%s", filename);
@@ -794,7 +794,7 @@ ConstructCommand(cmdbuf, path, filename, tempfile)
 
 /*	Function Name: UncompressUnformatted
  *	Description: Finds an uncompressed unformatted manual page.
- *	Arguments: man_globals - the psuedo global structure.
+ *	Arguments: man_globals - the pseudo global structure.
  *                 entry - the manual page entry.
  * RETURNED        filename - location to put the name of the file.
  *	Returns: TRUE if the file was found.
@@ -1098,7 +1098,7 @@ ChangeLabel(Widget w, char * str)
 /*	Function Name: PositionCenter
  *	Description: This function positions the given widgets center
  *                   in the following location.
- *	Arguments: widget - the widget widget to postion
+ *	Arguments: widget - the widget widget to position
  *                 x,y - The location for the center of the widget
  *                 above - number of pixels above center to locate this widget
  *                 left - number of pixels left of center to locate this widget
@@ -1197,10 +1197,10 @@ ParseEntry(char *entry, char *path, char *sect, char *page)
 }
 
 /*      Function Name: GetGlobals
- *      Description: Gets the psuedo globals associated with the
+ *      Description: Gets the pseudo globals associated with the
  *                   manpage associated with this widget.
  *      Arguments: w - a widget in the manpage.
- *      Returns: the psuedo globals.
+ *      Returns: the pseudo globals.
  *      Notes: initial_widget is a globals variable.
  *             manglobals_context is a global variable.
  */
@@ -1227,7 +1227,7 @@ GetGlobals(Widget w)
 }
 
 /*      Function Name: SaveGlobals
- *      Description: Saves the psuedo globals on the widget passed
+ *      Description: Saves the pseudo globals on the widget passed
  *                   to this function, although GetGlobals assumes that
  *                   the data is associated with the popup child of topBox.
  *      Arguments: w - the widget to associate the data with.
@@ -1247,7 +1247,7 @@ SaveGlobals(Widget w, ManpageGlobals * globals)
 }
 
 /*      Function Name: RemoveGlobals
- *      Description: Removes the psuedo globals from the widget passed
+ *      Description: Removes the pseudo globals from the widget passed
  *                   to this function.
  *      Arguments: w - the widget to remove the data from.
  *      Returns: none.

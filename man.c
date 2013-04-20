@@ -531,7 +531,7 @@ SortAndRemove(Manual *man, int number)
     s1 = (char **)malloc(man->nentries * sizeof(char *));
     
     /* temporarily remove suffixes of entries, preventing them from */
-    /* being used in alpabetic comparison ie sccs-delta.1 vs sccs.1 */
+    /* being used in alphabetic comparison ie sccs-delta.1 vs sccs.1 */
     for (i2=0; i2<man->nentries; i2++)
       if ((s1[i2] = rindex(man->entries_less_paths[i2], '.')) != NULL)
 	*s1[i2] = '\0';  
@@ -849,8 +849,7 @@ static void
     {
     m = 0x80;
     if ( ++off >= maxstrlen )  /*  Finished sorting block of strings:    */
-       {                               /*  Restore duplicates to
-riginal order  */
+       {                       /*  Restore duplicates to original order  */
        reg Byte **cp;
        reg int *ocp;
          Byte **othercp;

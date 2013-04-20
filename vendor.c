@@ -105,7 +105,7 @@ static SectionNameRec SectionNames[] = {
     {"(3c) C Library Functions",		"3c"},
     {"(3e) ELF Library Functions",		"3e"},
     {"(3g) C Library Functions",		"3g"},
-    {"(3i) Wid Character Functions",		"3i"},
+    {"(3i) Wide Character Functions",		"3i"},
     {"(3k) Kernel VM Library Functions",	"3k"},
     {"(3m) Mathematical Library",		"3m"},
     {"(3n) Network Functions",			"3n"},

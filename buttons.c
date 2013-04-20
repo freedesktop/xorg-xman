@@ -51,7 +51,7 @@ static void StartManpage(ManpageGlobals * man_globals, Boolean help, Boolean pag
 static Widget * ConvertNamesToWidgets(Widget parent, char ** names);
 
 /*	Function Name: MakeTopBox
- *	Description: This funtion creates the top menu, in a shell widget.
+ *	Description: This function creates the top menu, in a shell widget.
  *	Arguments: none.
  *	Returns: the top level widget
  */
@@ -147,7 +147,7 @@ MakeTopBox(void)
 Widget
 CreateManpage(FILE * file)
 {
-  ManpageGlobals * man_globals;	/* The psuedo global structure. */
+  ManpageGlobals * man_globals;	/* The pseudo global structure. */
 
   man_globals = InitPsuedoGlobals();
   CreateManpageWidget(man_globals, MANNAME, TRUE);
@@ -162,7 +162,7 @@ CreateManpage(FILE * file)
 }
 
 /*	Function Name: InitPsuedoGlobals
- *	Description: Initializes the psuedo global variables.
+ *	Description: Initializes the pseudo global variables.
  *	Arguments: none.
  *	Returns: a pointer to a new pseudo globals structure.
  */
@@ -310,7 +310,7 @@ Boolean full_instance)
 
 /*	Function Name: StartManpage
  *	Description: Starts up a new manpage.
- *	Arguments: man_globals - the psuedo globals variable.
+ *	Arguments: man_globals - the pseudo globals variable.
  *                 help - is this a help file?
  *                 page - Is there a page to display?
  *	Returns: none.
@@ -561,7 +561,7 @@ CreateList(int section)
 
 /*	Function Name: MakeDirectoryBox
  *	Description: make a directory box.
- *	Arguments: man_globals - the psuedo global structure for each manpage.
+ *	Arguments: man_globals - the pseudo global structure for each manpage.
  *                 parent - this guys parent widget.
  *                 dir_disp - the directory display widget.
  *                 section - the section number.
@@ -598,7 +598,7 @@ MakeDirectoryBox(ManpageGlobals *man_globals, Widget parent, Widget *dir_disp, i
 /*	Function Name: MakeSaveWidgets.
  *	Description: This functions creates two popup widgets, the please 
  *                   standby widget and the would you like to save widget.
- *	Arguments: man_globals - the psuedo globals structure for each man page
+ *	Arguments: man_globals - the pseudo globals structure for each man page
  *                 parent - the realized parent for both popups.
  *	Returns: none.
  */
@@ -722,7 +722,7 @@ FormUpWidgets(Widget parent, char ** full_size, char ** half_size)
 }
   
 /*      Function Name: ConvertNamesToWidgets
- *      Description: Convers a list of names into a list of widgets.
+ *      Description: Converts a list of names into a list of widgets.
  *      Arguments: parent - the common parent of these widgets.
  *                 names - an array of widget names.
  *      Returns: an array of widget id's.

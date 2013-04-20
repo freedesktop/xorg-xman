@@ -34,7 +34,7 @@ from the X Consortium.
 #include "globals.h"
 #include "vendor.h"
 
-/* Map <CR> and control-M to goto begining of file. */
+/* Map <CR> and control-M to goto beginning of file. */
 
 #define SEARCHARGS 10
 
@@ -43,7 +43,7 @@ static int BEntrySearch(char * string, char ** first, int number);
 
 /*	Function Name: MakeSearchWidget
  *	Description: This Function Creates the Search Widget.
- *	Arguments: man_globals - the pseudo globas for this manpage.
+ *	Arguments: man_globals - the pseudo globals for this manpage.
  *                 w - the widgets parent
  *	Returns: the search widget.
  */
@@ -129,7 +129,7 @@ ManpageGlobals * man_globals)
 /*	Function Name: DoSearch
  *	Description: This function performs a search for a man page or apropos
  *                   search upon search string.
- *	Arguments: man_globals - the pseudo globas for this manpage.
+ *	Arguments: man_globals - the pseudo globals for this manpage.
  *                 type - the type of search.
  *	Returns: none.
  */
@@ -273,7 +273,7 @@ DoSearch(ManpageGlobals * man_globals, int type)
     ChangeLabel(man_globals->label,label);
     fseek(file, 0L, SEEK_SET);		/* reset file to point at top. */
   }
-  else {			/* MANUAL SEACH */
+  else {			/* MANUAL SEARCH */
     file = DoManualSearch(man_globals, search_string);
     if (file == NULL) {
       snprintf(string_buf, sizeof(string_buf), "No manual entry for %s.", search_string);
