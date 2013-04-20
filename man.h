@@ -83,35 +83,35 @@ from the X Consortium.
 #  define Log(x)   { if(False) printf x; }
 #endif /* DEBUG */
 
-/* 
+/*
  * Assigning values here allows the user of Bitwise Or.
  */
 
 typedef struct _XmanFonts {
-  XFontStruct * directory;		/* The font for the directory.  */
+    XFontStruct *directory;     /* The font for the directory.  */
 } XmanFonts;
 
 typedef struct _XmanCursors {
-  Cursor top,			/* The top Cursor, default for xman. */
-    help,			/* The top cursor for the help menu. */
-    manpage,			/* The cursor for the Manpage. */
-    search_entry;		/* The cursor for the text widget in the
-				   search box.*/
-  Pixel fg_color;		/* foreground color of cursors. */
-  Pixel bg_color;		/* background color of cursors. */
+    Cursor top,                 /* The top Cursor, default for xman. */
+     help,                      /* The top cursor for the help menu. */
+     manpage,                   /* The cursor for the Manpage. */
+     search_entry;              /* The cursor for the text widget in the
+                                   search box. */
+    Pixel fg_color;             /* foreground color of cursors. */
+    Pixel bg_color;             /* background color of cursors. */
 } XmanCursors;
 
 typedef struct _ManPageWidgets {
-  Widget manpage,		/* The manual page window (scrolled) */
-    directory,			/* The widget in which all directories will
-				   appear. */
-    *box;			/* The boxes containing the sections. */
+    Widget manpage,             /* The manual page window (scrolled) */
+     directory,                 /* The widget in which all directories will
+                                   appear. */
+    *box;                       /* The boxes containing the sections. */
 } ManPageWidgets;
 
 typedef struct _MenuStruct {
-  caddr_t data;
-  int number;
-  XrmQuark quark;
+    caddr_t data;
+    int number;
+    XrmQuark quark;
 } MenuStruct;
 
 /*
@@ -119,91 +119,91 @@ typedef struct _MenuStruct {
  */
 
 typedef struct tManual {
-  char * blabel;		/* The button label. */
-  char ** entries; 		/* The individual man page file names. */
-  char ** entries_less_paths;   /* Entry names only */
-  int nentries;			/* how many (TOTAL)*/
-  int nalloc;			/* how much space allocated */
-  int flags;			/* suffix, fold */
+    char *blabel;               /* The button label. */
+    char **entries;             /* The individual man page file names. */
+    char **entries_less_paths;  /* Entry names only */
+    int nentries;               /* how many (TOTAL) */
+    int nalloc;                 /* how much space allocated */
+    int flags;                  /* suffix, fold */
 } Manual;
-   
+
 /* pseudo Globals that are specific to each manpage created. */
 
-typedef struct _ManpageGlobals{
-  int current_directory;	/* The directory currently being shown 
-				   on this manpage. */
-  Boolean dir_shown,		/* True if the directory is then current
-				   visible screen */
-    both_shown;			/* If true then both the manpage and
-				   the directory are to be shown.*/
-  Widget label,			/* The label widget at the top of the page. */
-    standby,			/* The please standby widget. */
-    save,			/* The "would you like to save?" widget. */
-    search_widget,		/* The search widget popup. */
-    help_button,		/* The help button. */
-    option_menu,		/* The option menu. */
-    text_widget;		/* text widget containing search string. */
- 
-  /* Widgets (Objects really) for the command menu entries. */ 
- 
-  Widget dir_entry, manpage_entry, help_entry, 
-    search_entry, both_screens_entry, remove_entry, 
-    open_entry, print_entry, version_entry, quit_entry; 
- 
+typedef struct _ManpageGlobals {
+    int current_directory;      /* The directory currently being shown
+                                   on this manpage. */
+    Boolean dir_shown,          /* True if the directory is then current
+                                   visible screen */
+     both_shown;                /* If true then both the manpage and
+                                   the directory are to be shown. */
+    Widget label,               /* The label widget at the top of the page. */
+     standby,                   /* The please standby widget. */
+     save,                      /* The "would you like to save?" widget. */
+     search_widget,             /* The search widget popup. */
+     help_button,               /* The help button. */
+     option_menu,               /* The option menu. */
+     text_widget;               /* text widget containing search string. */
+
+    /* Widgets (Objects really) for the command menu entries. */
+
+    Widget dir_entry, manpage_entry, help_entry,
+        search_entry, both_screens_entry, remove_entry,
+        open_entry, print_entry, version_entry, quit_entry;
+
 #ifdef INCLUDE_XPRINT_SUPPORT
-  /* Print objects and data */
-  Widget printdialog_shell;     /* Shell for the print dialog */
-  Widget printdialog;           /* Print dialog */
-#endif /*INCLUDE_XPRINT_SUPPORT */
-  /* Misc. */
+    /* Print objects and data */
+    Widget printdialog_shell;   /* Shell for the print dialog */
+    Widget printdialog;         /* Print dialog */
+#endif                          /*INCLUDE_XPRINT_SUPPORT */
+    /* Misc. */
 
-  char manpage_title[80];       /* The label to use for the current manpage. */
+    char manpage_title[80];     /* The label to use for the current manpage. */
 
-  char save_file[80];		/* the name of the file to save formatted
-				   page into. */
-  char tempfile[80];		/* the name of the file to copy the formatted
-				   page from. */
-  Boolean compress;		/* Compress file on save? */
-  Boolean gzip;			/* Gzip file on save? */
-  Boolean bzip2;		/* Bzip2 file on save? */
-  Boolean lzma;
-  Boolean deletetempfile;	/* Need to delete tempfile when done? */
-  char ** section_name;		/* The name of each of the sections */
+    char save_file[80];         /* the name of the file to save formatted
+                                   page into. */
+    char tempfile[80];          /* the name of the file to copy the formatted
+                                   page from. */
+    Boolean compress;           /* Compress file on save? */
+    Boolean gzip;               /* Gzip file on save? */
+    Boolean bzip2;              /* Bzip2 file on save? */
+    Boolean lzma;
+    Boolean deletetempfile;     /* Need to delete tempfile when done? */
+    char **section_name;        /* The name of each of the sections */
 
-  ManPageWidgets manpagewidgets; /* The manpage widgets. */
+    ManPageWidgets manpagewidgets;      /* The manpage widgets. */
 
-  /* Things to remember when cleaning up when killing manpage. */
+    /* Things to remember when cleaning up when killing manpage. */
 
-  Widget This_Manpage;		/* a pointer to the root of
-				   this manpage. */
+    Widget This_Manpage;        /* a pointer to the root of
+                                   this manpage. */
 
-  FILE  *curr_file;             /* Current file shown in manpage widget */
+    FILE *curr_file;            /* Current file shown in manpage widget */
 } ManpageGlobals;
 
 
 /* Resource manager sets these. */
 
 typedef struct _Xman_Resources {
-  XmanFonts fonts;		/* The fonts used for the man pages. */
-  XmanCursors cursors;		/* The cursors for xman. */
-  Boolean show_help_syntax;	/* True if syntax message should be dumped to
-				   stdout. */
-  Boolean both_shown_initial;	/* The initial state of the manual pages
-				   show two screens or only one. */
-  Boolean top_box_active;	/* Put up the Top Box. */
-  Boolean clear_search_string;	/* clear the search string each time it
-				   is popped down? */
-  int directory_height;	        /* The default height of directory in 
-				   both_shown mode. */
-  char * help_file;		/* The name of the help file. */
-  char * title;	    	        /* The title for topBox */
-  Boolean iconic;		/* Should topBox come up in an iconic state */
+    XmanFonts fonts;            /* The fonts used for the man pages. */
+    XmanCursors cursors;        /* The cursors for xman. */
+    Boolean show_help_syntax;   /* True if syntax message should be dumped to
+                                   stdout. */
+    Boolean both_shown_initial; /* The initial state of the manual pages
+                                   show two screens or only one. */
+    Boolean top_box_active;     /* Put up the Top Box. */
+    Boolean clear_search_string;        /* clear the search string each time it
+                                           is popped down? */
+    int directory_height;       /* The default height of directory in
+                                   both_shown mode. */
+    char *help_file;            /* The name of the help file. */
+    char *title;                /* The title for topBox */
+    Boolean iconic;             /* Should topBox come up in an iconic state */
 } Xman_Resources;
 
 /************************************************************
  *
  * Function Definitions
- * 
+ *
  ************************************************************/
 
 /*
@@ -217,12 +217,14 @@ typedef struct _Xman_Resources {
 
 /* buttons.c */
 
-ManpageGlobals * InitPsuedoGlobals(void);
+ManpageGlobals *InitPsuedoGlobals(void);
 Widget CreateManpage(FILE * file);
-void CreateManpageWidget(ManpageGlobals * man_globals, char * name, Boolean full_instance);
-void FormUpWidgets(Widget parent, char ** full_size, char ** half_size);
-void MakeDirectoryBox(ManpageGlobals *man_globals, Widget parent, Widget *dir_disp, int section);
-void MakeSaveWidgets(ManpageGlobals *man_globals, Widget parent);
+void CreateManpageWidget(ManpageGlobals * man_globals, char *name,
+                         Boolean full_instance);
+void FormUpWidgets(Widget parent, char **full_size, char **half_size);
+void MakeDirectoryBox(ManpageGlobals * man_globals, Widget parent,
+                      Widget * dir_disp, int section);
+void MakeSaveWidgets(ManpageGlobals * man_globals, Widget parent);
 void MakeTopBox(void);
 
 /* handler.c */
@@ -234,18 +236,26 @@ void Popup(Widget w, XtGrabKind grab_kind);
 
 /* Action Routines. */
 
-void CreateNewManpage(Widget w, XEvent * event, String * params, Cardinal * num_params);
+void CreateNewManpage(Widget w, XEvent * event, String * params,
+                      Cardinal * num_params);
 void GotoPage(Widget w, XEvent * event, String * params, Cardinal * num_params);
-void PopupHelp(Widget w, XEvent * event, String * params, Cardinal * num_params);
-void PopupSearch(Widget w, XEvent * event, String * params, Cardinal * num_params);
+void PopupHelp(Widget w, XEvent * event, String * params,
+               Cardinal * num_params);
+void PopupSearch(Widget w, XEvent * event, String * params,
+                 Cardinal * num_params);
 void Quit(Widget w, XEvent * event, String * params, Cardinal * num_params);
-void RemoveThisManpage(Widget w, XEvent * event, String * params, Cardinal * num_params);
-void SaveFormattedPage(Widget w, XEvent * event, String * params, Cardinal * num_params);
+void RemoveThisManpage(Widget w, XEvent * event, String * params,
+                       Cardinal * num_params);
+void SaveFormattedPage(Widget w, XEvent * event, String * params,
+                       Cardinal * num_params);
 void Search(Widget w, XEvent * event, String * params, Cardinal * num_params);
+
 #ifdef INCLUDE_XPRINT_SUPPORT
-void PrintThisManpage(Widget w, XEvent * event, String * params, Cardinal * num_params);
+void PrintThisManpage(Widget w, XEvent * event, String * params,
+                      Cardinal * num_params);
 #endif /* INCLUDE_XPRINT_SUPPORT */
-void ShowVersion(Widget w, XEvent * event, String * params, Cardinal * num_params);
+void ShowVersion(Widget w, XEvent * event, String * params,
+                 Cardinal * num_params);
 
 /* help.c */
 
@@ -257,21 +267,24 @@ Bool ReadManConfig(char manpath[]);
 int Man(void);
 
 /* misc.c */
-FILE * FindManualFile(ManpageGlobals * man_globals, int section_num, int entry_num);
-ManpageGlobals * GetGlobals(Widget w);
+FILE *FindManualFile(ManpageGlobals * man_globals, int section_num,
+                     int entry_num);
+ManpageGlobals *GetGlobals(Widget w);
+
 void AddCursor(Widget w, Cursor cursor);
-void ChangeLabel(Widget w, char * str);
+void ChangeLabel(Widget w, char *str);
 void OpenFile(ManpageGlobals * man_globals, FILE * file);
-void PopupWarning(ManpageGlobals * man_globals, const char * string);
-void PositionCenter(Widget widget, int x, int y, int above, int left, int v_space, int h_space);
-void PrintError(char * string);
+void PopupWarning(ManpageGlobals * man_globals, const char *string);
+void PositionCenter(Widget widget, int x, int y, int above, int left,
+                    int v_space, int h_space);
+void PrintError(char *string);
 void RemoveGlobals(Widget w);
 void SaveGlobals(Widget w, ManpageGlobals * globals);
 void ParseEntry(char *entry, char *path, char *sect, char *page);
-FILE * Format(ManpageGlobals * man_globals, char * entry);
+FILE *Format(ManpageGlobals * man_globals, char *entry);
 
 /* search */
-FILE * DoSearch(ManpageGlobals * man_globals, int type);
+FILE *DoSearch(ManpageGlobals * man_globals, int type);
 void MakeSearchWidget(ManpageGlobals * man_globals, Widget parent);
 
 /* tkfunctions.c */
@@ -279,4 +292,4 @@ void MakeSearchWidget(ManpageGlobals * man_globals, Widget parent);
 int Width(Widget);
 int Height(Widget);
 int BorderWidth(Widget);
-char * Name(Widget);
+char *Name(Widget);

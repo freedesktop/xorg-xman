@@ -37,41 +37,41 @@ from the X Consortium.
  */
 
 #ifndef HELPFILE
-#define HELPFILE "/usr/lib/X11/xman.help" /* name of the default helpfile. */ 
+#define HELPFILE "/usr/lib/X11/xman.help"  /* name of the default helpfile. */
 #endif
 
 /* The default cursors */
 
-#define XMAN_CURSOR "left_ptr"		/* Top level cursor. */
-#define HELP_CURSOR "left_ptr"	        /* The help cursor. */
-#define MANPAGE_CURSOR "left_ptr"	/* The manpage cursor. */
-#define SEARCH_ENTRY_CURSOR "question_arrow"	/* The search text widget
-						   cursor. */
-#define DIRECTORY_NORMAL "fixed" /* The default dir font */
+#define XMAN_CURSOR "left_ptr"          /* Top level cursor. */
+#define HELP_CURSOR "left_ptr"          /* The help cursor. */
+#define MANPAGE_CURSOR "left_ptr"       /* The manpage cursor. */
+#define SEARCH_ENTRY_CURSOR "question_arrow"    /* The search text widget
+                                                   cursor. */
+#define DIRECTORY_NORMAL "fixed"        /* The default dir font */
 
-#define OPTION_MENU "optionMenu" /* Name of the Option Menu. */
-#define SECTION_MENU "sectionMenu" /* Name of the Section Menu. */
+#define OPTION_MENU "optionMenu"        /* Name of the Option Menu. */
+#define SECTION_MENU "sectionMenu"      /* Name of the Section Menu. */
 
-#define HELP_BUTTON "helpButton" /* Name of top help button */
-#define QUIT_BUTTON "quitButton" /* Name of top quit button */
-#define MANPAGE_BUTTON "manpageButton" /* Name of top manpage button */
+#define HELP_BUTTON "helpButton"        /* Name of top help button */
+#define QUIT_BUTTON "quitButton"        /* Name of top quit button */
+#define MANPAGE_BUTTON "manpageButton"  /* Name of top manpage button */
 
-#define TOPBOXNAME  "topBox"	/* Name of the Top Box. */
-#define MANNAME "manualBrowser"	/* name for each manual page widget. */
-#define SEARCHNAME "search" /* The name for the search widget. */
-#define HELPNAME  "help"	/* The name of the help widget. */
-#define DIRECTORY_NAME "directory" /* name of the directory widget. */
-#define MANUALPAGE "manualPage"	/* name of the Scrollbyline widget that
-				 contains the man page. */
+#define TOPBOXNAME  "topBox"            /* Name of the Top Box. */
+#define MANNAME "manualBrowser"         /* name for each manual page widget. */
+#define SEARCHNAME "search"             /* The name for the search widget. */
+#define HELPNAME  "help"                /* The name of the help widget. */
+#define DIRECTORY_NAME "directory"      /* name of the directory widget. */
+#define MANUALPAGE "manualPage"         /* name of the Scrollbyline widget that
+                                           contains the man page. */
 #define DIALOG         "dialog"
 
 /* Names of the menu buttons */
 
 #ifdef INCLUDE_XPRINT_SUPPORT
-#define NUM_OPTIONS 10		/* Number of menu options. */
-#else /* !INCLUDE_XPRINT_SUPPORT */
-#define NUM_OPTIONS 9		/* Number of menu options. */
-#endif /* !INCLUDE_XPRINT_SUPPORT */
+#define NUM_OPTIONS 10          /* Number of menu options. */
+#else                           /* !INCLUDE_XPRINT_SUPPORT */
+#define NUM_OPTIONS 9           /* Number of menu options. */
+#endif                          /* !INCLUDE_XPRINT_SUPPORT */
 
 #define DIRECTORY      "displayDirectory"
 #define MANPAGE        "displayManualPage"
@@ -82,7 +82,7 @@ from the X Consortium.
 #define OPEN_MANPAGE   "openNewManpage"
 #ifdef INCLUDE_XPRINT_SUPPORT
 #define PRINT_MANPAGE  "printManualPage"
-#endif /* INCLUDE_XPRINT_SUPPORT */
+#endif                          /* INCLUDE_XPRINT_SUPPORT */
 #define SHOW_VERSION   "showVersion"
 #define QUIT           "quit"
 
@@ -91,8 +91,8 @@ from the X Consortium.
 #define SHOW_BOTH "Show Both Screens"
 #define SHOW_ONE "Show One Screen"
 
-/* 
- * Things will not look right if you change these names to make 
+/*
+ * Things will not look right if you change these names to make
  * MANUALSEARCH longer APROPOSSEARCH, see search.c for details.
  */
 
@@ -116,17 +116,17 @@ from the X Consortium.
 #define HANDLE_ROFFSEQ
 #endif
 
-#define DEFAULT_WIDTH 500	/* The default width of xman. */
-#define SECTALLOC  8		/* The number of entries allocated
-				   at a time for the manual structures. */
-#define ENTRYALLOC 100		/* The number of entries allocated
-				   at a time for a section. */
+#define DEFAULT_WIDTH 500       /* The default width of xman. */
+#define SECTALLOC  8            /* The number of entries allocated
+                                   at a time for the manual structures. */
+#define ENTRYALLOC 100          /* The number of entries allocated
+                                   at a time for a section. */
 
-#define INITIAL_DIR 0		/* The Initial Directory displayed. */
+#define INITIAL_DIR 0           /* The Initial Directory displayed. */
 
-#define COPY "cp"		/* copy command */
-#define CHMOD_MODE 00666	/* permissions set on saved formatted files */
-#define MANDESC "mandesc"	/* name of the mandesc files */
+#define COPY "cp"               /* copy command */
+#define CHMOD_MODE 00666        /* permissions set on saved formatted files */
+#define MANDESC "mandesc"       /* name of the mandesc files */
 
 #define INDENT 15
 #define TYP20STR "MMMMMMMMMMMMMMMMMMMM"
@@ -141,6 +141,6 @@ from the X Consortium.
 
 #define streq(a, b)        ( strcmp((a), (b)) == 0 )
 
-/* 
+/*
  * Function definitions moved to man.h
  */

@@ -104,18 +104,18 @@ from the X Consortium.
 	!defined(__UNIXWARE__) && !defined(__SCO__) && !defined(sun)) || defined(sgi)
 #  define COMPRESSION_EXTENSION   "z"
 #  define UNCOMPRESS_FORMAT       "pcat %s > %s"
-#  define NO_COMPRESS		/* mac can't handle using pack as a filter and
-				   xman needs it to be done that way. */
+#  define NO_COMPRESS           /* mac can't handle using pack as a filter and
+                                   xman needs it to be done that way. */
 #elif defined(UTEK)
 #  define COMPRESSION_EXTENSION "C"
 #  define UNCOMPRESS_FORMAT     "ccat < %s > %s"
 #  define COMPRESS              "compact"
 #elif defined (ISC) || defined(__SCO__) || defined(__UNIXWARE__)
-#  define COMPRESSION_EXTENSION   "Z"     /* dummy */
+#  define COMPRESSION_EXTENSION   "Z"           /* dummy */
 #  if !defined(__SCO__) && !defined(__UNIXWARE__)
-#    define COMPRESSION_EXTENSIONS  "zZF" /* pack, compress, freeze */
+#    define COMPRESSION_EXTENSIONS  "zZF"       /* pack, compress, freeze */
 #  else
-#    define COMPRESSION_EXTENSIONS  "zZ"  /* pack, compress */
+#    define COMPRESSION_EXTENSIONS  "zZ"        /* pack, compress */
 #  endif
 #  define UNCOMPRESS_FORMAT       uncompress_format
 #  define UNCOMPRESS_FORMAT_1     "pcat %s > %s"
@@ -178,7 +178,7 @@ from the X Consortium.
 
 #ifndef HANDLE_ROFFSEQ
 # if defined(ultrix)
-#  define FORMAT "| nroff -man"             /* The format command. */
+#  define FORMAT "| nroff -man" /* The format command. */
 # elif defined(CSRG_BASED)
 #  define FORMAT "| eqn | tbl | nroff -mandoc"
 # elif defined(BSD) && (BSD >= 199103)
@@ -186,10 +186,10 @@ from the X Consortium.
 # elif defined(linux) || defined(__CYGWIN__)
 #  define FORMAT "| pic | eqn | tbl -Tlatin1 | GROFF_NO_SGR= groff -Tlatin1 -mandoc"
 # else
-#  define FORMAT "| neqn | nroff -man"      /* The format command. */
+#  define FORMAT "| neqn | nroff -man"  /* The format command. */
 # endif
 # define TBL "tbl"
-#else /* HANDLE_ROFFSEQ */
+#else                           /* HANDLE_ROFFSEQ */
 # if defined(linux)
 #  define ZSOELIM	"zsoelim"
 # else
@@ -211,7 +211,7 @@ from the X Consortium.
 #  define FORMAT	"groff -man"
 # endif
 # define DEFAULT_MANROFFSEQ "et"
-#endif /*HANDLE_ROFFSEQ */
+#endif                          /*HANDLE_ROFFSEQ */
 
 /*
  * Names of the man and cat dirs.
@@ -242,17 +242,18 @@ from the X Consortium.
 #  define SMAN			"sman"
 #  undef SEARCHOTHER
 #  define SEARCHOTHER 		SMAN
-#  define SGMLENT_EXTENSION	"ent"	/* SGML entity files end in ".ent" */
+#  define SGMLENT_EXTENSION	"ent"   /* SGML entity files end in ".ent" */
 #endif
 
 
 typedef struct _SectionList {
-  struct _SectionList * next;
-  char * label;			/* section label */
-  char * directory;		/* section directory */
-  int flags;
+    struct _SectionList *next;
+    char *label;                /* section label */
+    char *directory;            /* section directory */
+    int flags;
 } SectionList;
 
-extern char * CreateManpageName(char * entry, int section, int flags);
-extern void AddStandardSections(SectionList **list, char * path);
-extern void AddNewSection(SectionList **list, char * path, char * file, char * label, int flags);
+extern char *CreateManpageName(char *entry, int section, int flags);
+extern void AddStandardSections(SectionList ** list, char *path);
+extern void AddNewSection(SectionList ** list, char *path, char *file,
+                          char *label, int flags);

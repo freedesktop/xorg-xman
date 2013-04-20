@@ -49,41 +49,41 @@ Boolean
 MakeHelpWidget(void)
 {
 
-  ManpageGlobals * man_globals;	/* The pseudo global structure. */
-  
-  if (help_widget != NULL)	/* If we already have a help widget. 
-				   then do not create one. */
-    return(TRUE);
+    ManpageGlobals *man_globals;        /* The pseudo global structure. */
 
-  man_globals = InitPsuedoGlobals();
+    if (help_widget != NULL)    /* If we already have a help widget.
+                                   then do not create one. */
+        return (TRUE);
 
-  CreateManpageWidget(man_globals, HELPNAME, FALSE);
-  help_widget = man_globals->This_Manpage;
+    man_globals = InitPsuedoGlobals();
 
-  if (OpenHelpfile(man_globals) == FALSE) {
-    XtDestroyWidget(help_widget);
-    help_widget = NULL;
-    return(FALSE);
-  }
+    CreateManpageWidget(man_globals, HELPNAME, FALSE);
+    help_widget = man_globals->This_Manpage;
 
-  ChangeLabel(man_globals->label, "Xman Help");
+    if (OpenHelpfile(man_globals) == FALSE) {
+        XtDestroyWidget(help_widget);
+        help_widget = NULL;
+        return (FALSE);
+    }
 
-  XtManageChild( man_globals->manpagewidgets.manpage );
-  XtRealizeWidget(  help_widget );
-  SaveGlobals( man_globals->This_Manpage, man_globals );
-  AddCursor( help_widget, resources.cursors.manpage);
+    ChangeLabel(man_globals->label, "Xman Help");
+
+    XtManageChild(man_globals->manpagewidgets.manpage);
+    XtRealizeWidget(help_widget);
+    SaveGlobals(man_globals->This_Manpage, man_globals);
+    AddCursor(help_widget, resources.cursors.manpage);
 
 /*
  * Set up ICCCM delete window.
  */
-  XtOverrideTranslations
-      (man_globals->This_Manpage, 
-       XtParseTranslationTable ("<Message>WM_PROTOCOLS: RemoveThisManpage()"));
-  (void) XSetWMProtocols (XtDisplay(man_globals->This_Manpage),
-			  XtWindow(man_globals->This_Manpage),
-			  &wm_delete_window, 1);
+    XtOverrideTranslations
+        (man_globals->This_Manpage,
+         XtParseTranslationTable("<Message>WM_PROTOCOLS: RemoveThisManpage()"));
+    (void) XSetWMProtocols(XtDisplay(man_globals->This_Manpage),
+                           XtWindow(man_globals->This_Manpage),
+                           &wm_delete_window, 1);
 
-  return(TRUE);
+    return (TRUE);
 }
 
 /*	Function Name: OpenHelpfile
@@ -95,14 +95,14 @@ MakeHelpWidget(void)
 Boolean
 OpenHelpfile(ManpageGlobals * man_globals)
 {
-  FILE * help_file_ptr;
+    FILE *help_file_ptr;
 
-  if( (help_file_ptr = fopen(resources.help_file, "r")) == NULL ) {
-    PopupWarning(man_globals,
-		 "Could not open help file, NO HELP WILL BE AVAILABLE.");
-    return(FALSE);
-  }
-    
-  OpenFile(man_globals, help_file_ptr);
-  return(TRUE);
+    if ((help_file_ptr = fopen(resources.help_file, "r")) == NULL) {
+        PopupWarning(man_globals,
+                     "Could not open help file, NO HELP WILL BE AVAILABLE.");
+        return (FALSE);
+    }
+
+    OpenFile(man_globals, help_file_ptr);
+    return (TRUE);
 }
