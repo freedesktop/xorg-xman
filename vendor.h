@@ -105,29 +105,16 @@ from the X Consortium.
 #  define NO_COMPRESS
 #else
 #  define COMPRESSION_EXTENSION "Z"
-#  ifndef HAS_MKSTEMP
-#    define UNCOMPRESS_FORMAT     "zcat < %s > %s"
-#  else
-#    define UNCOMPRESS_FORMAT     "zcat < %s >> %s"
-#  endif
+#  define UNCOMPRESS_FORMAT     "zcat < %s >> %s"
 #  define COMPRESS              "compress"
 #  define GZIP_EXTENSION "gz"
-#  ifndef HAS_MKSTEMP
-#    define GUNZIP_FORMAT "gzip -c -d < %s > %s"
-#  else
-#    define GUNZIP_FORMAT "gzip -c -d < %s >> %s"
-#  endif
+#  define GUNZIP_FORMAT "gzip -c -d < %s >> %s"
 #  define GZIP_COMPRESS "gzip"
 #  define BZIP2_EXTENSION "bz2"
-#  define LZMA_EXTENSION "lzma"
-#  ifndef HAS_MKSTEMP
-#    define BUNZIP2_FORMAT "bunzip2 -c -d < %s > %s"
-#    define UNLZMA_FORMAT "unlzma -c -d < %s > %s"
-#  else
-#    define BUNZIP2_FORMAT "bunzip2 -c -d < %s >> %s"
-#    define UNLZMA_FORMAT "unlzma -c -d < %s >> %s"
-#  endif
+#  define BUNZIP2_FORMAT "bunzip2 -c -d < %s >> %s"
 #  define BZIP2_COMPRESS "bzip2"
+#  define LZMA_EXTENSION "lzma"
+#  define UNLZMA_FORMAT "unlzma -c -d < %s >> %s"
 #  define LZMA_COMPRESS "lzma"
 #endif
 
@@ -141,19 +128,10 @@ from the X Consortium.
 #  define NO_MANPATH_SUPPORT
 #endif
 
-#ifndef HAS_MKSTEMP
-#  ifdef NO_MANPATH_SUPPORT
-#    define APROPOS_FORMAT ("man -k %s | pr -h Apropos > %s")
-#  else
-#    define APROPOS_FORMAT ("man -M %s -k %s | pr -h Apropos > %s")
-#  endif
+#ifdef NO_MANPATH_SUPPORT
+#  define APROPOS_FORMAT ("man -k %s | pr -h Apropos >> %s")
 #else
-/* with mkstemp the temp output file is already created */
-#  ifdef NO_MANPATH_SUPPORT
-#    define APROPOS_FORMAT ("man -k %s | pr -h Apropos >> %s")
-#  else
-#    define APROPOS_FORMAT ("man -M %s -k %s | pr -h Apropos >> %s")
-#  endif
+#  define APROPOS_FORMAT ("man -M %s -k %s | pr -h Apropos >> %s")
 #endif
 
 #ifndef HANDLE_ROFFSEQ

@@ -153,9 +153,7 @@ DoSearch(ManpageGlobals * man_globals, int type)
     char string_buf[BUFSIZ], cmp_str[BUFSIZ], error_buf[BUFSIZ];
     char *search_string = SearchString(man_globals);
     FILE *file;
-#ifdef HAS_MKSTEMP
     int fd;
-#endif
     int count;
     Boolean flag;
 
@@ -182,15 +180,11 @@ DoSearch(ManpageGlobals * man_globals, int type)
         char label[BUFSIZ];
 
         strcpy(tmp, MANTEMP);   /* get a temp file. */
-#ifdef HAS_MKSTEMP
         fd = mkstemp(tmp);
         if (fd < 0) {
             PopupWarning(man_globals, "Cant create temp file");
             return NULL;
         }
-#else
-        (void) mktemp(tmp);
-#endif
         mantmp = tmp;
 
         manpath = getenv("MANPATH");
@@ -226,11 +220,7 @@ DoSearch(ManpageGlobals * man_globals, int type)
             PopupWarning(man_globals, error_buf);
         }
 
-#ifdef HAS_MKSTEMP
         if ((file = fdopen(fd, "r")) == NULL)
-#else
-        if ((file = fopen(mantmp, "r")) == NULL)
-#endif
             PrintError("lost temp file? out of temp space?");
 
 /*

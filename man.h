@@ -28,6 +28,9 @@ from the X Consortium.
 
 */
 
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 
 /* X toolkit header files */
 
@@ -256,6 +259,11 @@ Bool ReadManConfig(char manpath[]);
 int Man(void);
 
 /* misc.c */
+#ifndef HAVE_MKSTEMP
+_X_HIDDEN int Xmkstemp (char *template);
+# define mkstemp Xmkstemp
+#endif
+
 FILE *FindManualFile(ManpageGlobals * man_globals, int section_num,
                      int entry_num);
 ManpageGlobals *GetGlobals(Widget w);

@@ -37,8 +37,7 @@ AC_CONFIG_HEADERS([config.h])
 
 AC_CANONICAL_HOST
 
-AC_CHECK_FUNC([mkstemp], 
-   AC_DEFINE(HAS_MKSTEMP,1,[Define to 1 if you have the "mkstemp" function.]))
+AC_CHECK_FUNCS([mkstemp])
 
 AC_ARG_WITH(helpdir,
         AS_HELP_STRING([--with-helpdir=<path>],
