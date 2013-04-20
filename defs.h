@@ -34,6 +34,10 @@ from the X Consortium.
  * Created:   October 22, 1987
  */
 
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
+
 #ifndef HELPFILE
 #define HELPFILE "/usr/lib/X11/xman.help"  /* name of the default helpfile. */
 #endif

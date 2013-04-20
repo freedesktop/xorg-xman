@@ -37,6 +37,11 @@ AC_CONFIG_HEADERS([config.h])
 
 AC_CANONICAL_HOST
 
+AC_CHECK_PROG([GROFF], [groff], [found], [missing])
+if test "x$GROFF" = "xfound" ; then
+   AC_DEFINE([HAS_GROFF], 1, [Define to 1 if you have the groff package.])
+fi
+
 AC_CHECK_FUNCS([mkstemp])
 
 AC_ARG_WITH(helpdir,
