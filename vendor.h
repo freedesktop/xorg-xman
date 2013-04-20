@@ -67,9 +67,7 @@ from the X Consortium.
 
 #ifndef SYSMANPATH
 
-#if defined(macII)
-#  define SYSMANPATH "/usr/catman/u_man:/usr/catman/a_man"
-#elif defined(__bsdi__)
+#if defined(__bsdi__)
 #  define SYSMANPATH "/usr/share/man:/usr/contrib/man:/usr/contrib/isode/man:/usr/local/man"
 #elif defined(__OpenBSD__) || defined(__DARWIN__)
 #  define SYSMANPATH "/usr/share/man:/usr/local/man:/usr/X11R6/man"
@@ -95,7 +93,7 @@ from the X Consortium.
  * Compression Definitions.
  */
 
-#if defined( macII ) || defined( hcx ) || \
+#if defined( hcx ) || \
 	(defined(SYSV) && defined(i386) && !defined(ISC) && \
 	!defined(__UNIXWARE__) && !defined(__SCO__) && !defined(sun)) || defined(sgi)
 #  define COMPRESSION_EXTENSION   "z"
@@ -148,7 +146,7 @@ from the X Consortium.
  * The command filters for the manual and apropos searches.
  */
 
-#if (defined(hpux) || defined(macII) || defined(hcx) )
+#if (defined(hpux) || defined(hcx) )
 #  define NO_MANPATH_SUPPORT
 #endif
 
@@ -213,10 +211,10 @@ from the X Consortium.
 #endif
 
 /*
- * The Apple, SYSV386, and HCX folks put the preformatted pages in the
+ * The SYSV386, and HCX folks put the preformatted pages in the
  * "man" directories.
  */
-#if (defined(macII) || defined(hcx) || \
+#if (defined(hcx) || \
 	(defined(SYSV) && defined(i386))) && !defined(SCO) && !defined(sun)
 #  define CAT MAN
 #elif defined(SCO)
