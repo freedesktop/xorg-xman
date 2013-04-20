@@ -463,10 +463,8 @@ ReadCurrentSection(Manual * local_manual, char *path)
 
         if (name[0] == '.')
             continue;
-#ifndef CRAY
         if (index(name, '.') == NULL)
             continue;
-#endif
         if (nentries >= nalloc) {
             nalloc += ENTRYALLOC;
             local_manual->entries =

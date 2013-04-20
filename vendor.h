@@ -156,8 +156,7 @@ from the X Consortium.
  * The command filters for the manual and apropos searches.
  */
 
-#if (defined(hpux) || defined(macII) || defined(CRAY) || defined(ultrix) || \
-	defined(hcx) )
+#if (defined(hpux) || defined(macII) || defined(ultrix) || defined(hcx) )
 #  define NO_MANPATH_SUPPORT
 #endif
 
@@ -224,10 +223,10 @@ from the X Consortium.
 #endif
 
 /*
- * The Apple, Cray,, SYSV386, and HCX folks put the preformatted pages in the
+ * The Apple, SYSV386, and HCX folks put the preformatted pages in the
  * "man" directories.
  */
-#if (defined(macII) || defined(CRAY) || defined(hcx) || \
+#if (defined(macII) || defined(hcx) || \
 	(defined(SYSV) && defined(i386))) && !defined(SCO) && !defined(sun)
 #  define CAT MAN
 #elif defined(SCO)
