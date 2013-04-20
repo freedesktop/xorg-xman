@@ -591,7 +591,7 @@ MakeDirectoryBox(ManpageGlobals * man_globals, Widget parent, Widget * dir_disp,
 
     name = manual[section].blabel;      /* Set the section name */
     snprintf(label_name, sizeof(label_name), "Directory of: %s", name);
-    man_globals->section_name[section] = StrAlloc(label_name);
+    man_globals->section_name[section] = XtNewString(label_name);
 
     num_args = 0;
     XtSetArg(arglist[num_args], XtNlist, CreateList(section));

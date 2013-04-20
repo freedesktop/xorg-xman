@@ -371,9 +371,9 @@ AddNewSection(SectionList ** list,
         *list = local_list;
 
     local_list->next = NULL;
-    local_list->label = StrAlloc(label);
+    local_list->label = XtNewString(label);
     snprintf(full_path, sizeof(full_path), "%s/%s", path, file);
-    local_list->directory = StrAlloc(full_path);
+    local_list->directory = XtNewString(full_path);
     local_list->flags = flags;
 }
 
@@ -503,7 +503,7 @@ ReadCurrentSection(Manual * local_manual, char *path)
             }
 #endif /* IGNORE_EXTENSION */
         }
-        local_manual->entries[nentries] = StrAlloc(full_name);
+        local_manual->entries[nentries] = XtNewString(full_name);
         local_manual->entries_less_paths[nentries] =
             rindex(local_manual->entries[nentries], '/');
         if (local_manual->entries_less_paths[nentries] == NULL)

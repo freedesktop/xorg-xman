@@ -203,12 +203,6 @@ typedef struct _Xman_Resources {
  *
  ************************************************************/
 
-/*
- * This is easier than trying to find all calls to StrAlloc().
- */
-
-#define StrAlloc(ptr) XtNewString(ptr)
-
 /* Standard library function definitions. */
 #include <stdlib.h>
 

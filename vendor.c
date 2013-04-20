@@ -226,5 +226,5 @@ CreateManpageName(char *entry, int section,     /* FIXME: unused */
     }
 
 
-    return (StrAlloc(page));
+    return (XtNewString(page));
 }
