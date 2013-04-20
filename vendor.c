@@ -109,22 +109,18 @@ static SectionNameRec SectionNames[] = {
     {"(3n) Network Functions",                  "3n"},
     {"(3r) RPC Services Library",               "3r"},
     {"(3s) Standard I/O Functions",             "3s"},
-#if OSMINORVERSION == 5
     {"(3t) Threads Library",                    "3t"},
-#endif
     {"(3x) Miscellaneous Library Functions",    "3x"},
     {"(4)  File Formats",                       "4"},
     {"(4b) Misc. Reference Manual Pages",       "4b"},
     {"(5)  Environments, Tables, and TROFF Macros", "5"},
     {"(6)  Games and Demos",                    "6"},
     {"(7)  Special Files",                      "7"},
-#if OSMINORVERSION == 5
     {"(7d)  Devices",                           "7d"},
     {"(7fs) File Systems",                      "7fs"},
     {"(7i)  Ioctl Requests",                    "7i"},
     {"(7m)  STREAMS Modules",                   "7m"},
     {"(7p)  Protocols",                         "7p"},
-#endif
     {"(9)  Device Driver Information",          "9"},
     {"(9e) DDI and DKI Driver Entry Points",    "9e"},
     {"(9f) DDI and DKI Kernel Functions",       "9f"},
