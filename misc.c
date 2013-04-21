@@ -685,10 +685,7 @@ ConstructCommand(char *cmdbuf, const char *path,
     int left = BUFSIZ;          /* space left in buffer */
     int used;
     const char *fmt;
-    FILE *file;
     char fmtbuf[128];
-    int gotfmt = 0;             /* set to 1 if we got a directive from source */
-    char fname[PATH_MAX];
 
     fmt = NULL;
     /* If you have a command line option that gives a setting for fmt,
@@ -699,23 +696,29 @@ ConstructCommand(char *cmdbuf, const char *path,
          * Annoyingly, filename might be relative or absolute. We cheat and
          * use system to get the thing to a known absolute filename.
          */
+        FILE *file;
+        int gotfmt = 0;    /* set to 1 if we got a directive from source */
+        char fname[PATH_MAX];
+
         if (filename[0] == '/') {
             snprintf(fname, sizeof(fname), "%s", filename);
         }
         else {
             snprintf(fname, sizeof(fname), "%s/%s", path, filename);
         }
-        if ((file = fopen(fname, "r")) &&
-            (fgets(fmtbuf, sizeof(fmtbuf), file)) &&
-            (!memcmp(fmtbuf, "'\\\" ", 4))) {
-            /* that's squote-backslash-dquote-space */
-            int len = strlen(fmtbuf);
+        if ((file = fopen(fname, "r")) != NULL) {
+            if ((fgets(fmtbuf, sizeof(fmtbuf), file)) &&
+                (!memcmp(fmtbuf, "'\\\" ", 4))) {
+                /* that's squote-backslash-dquote-space */
+                int len = strlen(fmtbuf);
 
-            if (len && (fmtbuf[len - 1] == '\n')) {
-                fmtbuf[len - 1] = 0;
-                fmt = fmtbuf + 3;
-                gotfmt++;
+                if (len && (fmtbuf[len - 1] == '\n')) {
+                    fmtbuf[len - 1] = 0;
+                    fmt = fmtbuf + 3;
+                    gotfmt++;
+                }
             }
+            fclose(file);
         }
         if (!gotfmt) {          /* not there or some error */
             fmt = getenv("MANROFFSEQ");
