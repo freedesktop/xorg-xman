@@ -583,6 +583,7 @@ Format(ManpageGlobals * man_globals, const char *entry)
     /* Handle more flexible way of specifying the formatting pipeline */
     if (!ConstructCommand(cmdbuf, path, filename, man_globals->tempfile)) {
         PopupWarning(man_globals, "Constructed command was too long!");
+        fclose(file);
         file = NULL;
     }
     else
@@ -592,6 +593,7 @@ Format(ManpageGlobals * man_globals, const char *entry)
         snprintf(error_buf, sizeof(error_buf),
                  "Something went wrong trying to run the command: %s", cmdbuf);
         PopupWarning(man_globals, error_buf);
+        fclose(file);
         file = NULL;
     }
     else {
