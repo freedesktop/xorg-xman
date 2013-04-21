@@ -505,8 +505,8 @@ void
 CreateNewManpage(Widget w, XEvent * event, String * params,
                  Cardinal * num_params)
 {
-    (void) CreateManpage(NULL);
-    man_pages_shown++;
+    if (CreateManpage(NULL))
+        man_pages_shown++;
 }
 
 /*      Function Name: RemoveThisManpage
@@ -591,14 +591,16 @@ Search(Widget w, XEvent * event, String * params, Cardinal * num_params)
                 char *label;
 
                 w = CreateManpage(file);
-                man_pages_shown++;
+                if (w) {
+                    man_pages_shown++;
 
-                /* Put title into new manual page. */
+                    /* Put title into new manual page. */
 
-                label = man_globals->manpage_title;
-                man_globals = GetGlobals(w);
-                strcpy(man_globals->manpage_title, label);
-                ChangeLabel(man_globals->label, label);
+                    label = man_globals->manpage_title;
+                    man_globals = GetGlobals(w);
+                    strcpy(man_globals->manpage_title, label);
+                    ChangeLabel(man_globals->label, label);
+                }
             }
             break;
         default:
