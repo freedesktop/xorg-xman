@@ -54,6 +54,8 @@ MakeHelpWidget(void)
         return (TRUE);
 
     man_globals = InitPsuedoGlobals();
+    if (man_globals == NULL)
+        return (FALSE);
 
     CreateManpageWidget(man_globals, HELPNAME, FALSE);
     help_widget = man_globals->This_Manpage;

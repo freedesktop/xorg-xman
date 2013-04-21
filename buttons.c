@@ -151,6 +151,8 @@ CreateManpage(FILE * file)
     ManpageGlobals *man_globals;        /* The pseudo global structure. */
 
     man_globals = InitPsuedoGlobals();
+    if (man_globals == NULL)
+        return NULL;
     CreateManpageWidget(man_globals, MANNAME, TRUE);
 
     if (file == NULL)
