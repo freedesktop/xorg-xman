@@ -120,7 +120,7 @@ SearchString(ManpageGlobals * man_globals)
         return (XawDialogGetValueString(dialog));
 
     PopupWarning(man_globals,
-                 "Could not get the search string, no search will be preformed.");
+                 "Could not get the search string, no search will be performed.");
     return (NULL);
 }
 
