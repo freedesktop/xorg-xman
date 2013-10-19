@@ -240,8 +240,10 @@ DoSearch(ManpageGlobals * man_globals, int type)
         count = 0;
         flag = FALSE;
         while ((fgets(cmp_str, BUFSIZ, file) != NULL) && (count < LOOKLINES)) {
-            if (cmp_str[strlen(cmp_str) - 1] == '\n')   /* strip off the '\n' */
-                cmp_str[strlen(cmp_str) - 1] = '\0';
+            size_t len = strlen(cmp_str);
+
+            if (len > 0 && cmp_str[len - 1] == '\n')  /* strip off the '\n' */
+                cmp_str[len - 1] = '\0';
 
             if (streq(cmp_str, string_buf)) {
                 flag = TRUE;
