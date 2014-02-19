@@ -159,7 +159,7 @@ from the X Consortium.
 # define REFER		"refer"
 # if defined(CSRG_BASED)
 #  define FORMAT	"nroff -mandoc"
-# elif defined(linux)
+# elif defined(linux) || defined(__CYGWIN__)
 #  define FORMAT	"GROFF_NO_SGR= groff -Tlatin1 -mandoc"
 # elif defined(__DARWIN__)
 #  define FORMAT	"nroff -man"
