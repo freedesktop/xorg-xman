@@ -320,7 +320,7 @@ SaveFormattedPage(Widget w, XEvent * event, String * params,
  * If we are not active then take no action.
  */
 
-    if (man_globals->tempfile == NULL)
+    if (man_globals->tempfile[0] == '\0')
         return;
 
     switch (params[0][0]) {
