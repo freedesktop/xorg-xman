@@ -254,7 +254,7 @@ DoSearch(ManpageGlobals * man_globals, int type)
 
         /*
          * If the file is less than this number of lines then assume that there is
-         * nothing apropriate found. This does not confuse the apropos filter.
+         * nothing appropriate found. This does not confuse the apropos filter.
          */
 
         if (flag) {
