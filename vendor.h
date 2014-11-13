@@ -164,7 +164,7 @@ from the X Consortium.
 # elif defined(__DARWIN__)
 #  define FORMAT	"nroff -man"
 # else
-#  define FORMAT	"groff -man"
+#  define FORMAT	"GROFF_NO_SGR= groff -Tlatin1 -man"
 # endif
 # define DEFAULT_MANROFFSEQ "et"
 #endif                          /*HANDLE_ROFFSEQ */
